@@ -1,0 +1,12 @@
+[
+  {"title": "LangChain 官方文档", "url": "https://python.langchain.com/docs/get_started/introduction", "tags": "LLM,LangChain", "type": "文章", "difficulty": "入门"},
+  {"title": "OpenAI API 文档", "url": "https://platform.openai.com/docs/overview", "tags": "LLM,API", "type": "文章", "difficulty": "入门"},
+  {"title": "Prompt Engineering Guide", "url": "https://www.promptingguide.ai/zh", "tags": "Prompt,LLM", "type": "文章", "difficulty": "入门"},
+  {"title": "吴恩达《ChatGPT Prompt Engineering for Developers》", "url": "https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/", "tags": "Prompt,LLM,视频", "type": "视频", "difficulty": "入门"},
+  {"title": "吴恩达《Building Systems with the ChatGPT API》", "url": "https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/", "tags": "LLM,API,视频", "type": "视频", "difficulty": "进阶"},
+  {"title": "吴恩达《LangChain for LLM Application Development》", "url": "https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/", "tags": "LangChain,LLM,视频", "type": "视频", "difficulty": "进阶"},
+  {"title": "RAG 从入门到精通", "url": "https://github.com/NirDiamant/RAG_Techniques", "tags": "RAG,LLM", "type": "案例", "difficulty": "进阶"},
+  {"title": "AI Agent 开发实践", "url": "https://github.com/microsoft/autogen", "tags": "Agent,LLM,AutoGen", "type": "案例", "difficulty": "进阶"},
+  {"title": "LlamaIndex 官方文档", "url": "https://docs.llamaindex.ai/", "tags": "RAG,LLM,LlamaIndex", "type": "文章", "difficulty": "进阶"},
+  {"title": "Hugging Face 课程", "url": "https://huggingface.co/learn/nlp-course/zh-CN", "tags": "NLP,Transformer", "type": "文章", "difficulty": "进阶"}
+]
