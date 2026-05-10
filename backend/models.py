@@ -31,7 +31,7 @@ class LearningTask(Base):
     title: Mapped[str] = mapped_column(String(200))
     description: Mapped[str] = mapped_column(Text, default="")
     type: Mapped[str] = mapped_column(String(20), default="阅读")
-    resource_id: Mapped[int] = mapped_column(Integer, nullable=True)
+    resource_id: Mapped[int | None] = mapped_column(ForeignKey("resource.id"), nullable=True)
     estimated_minutes: Mapped[int] = mapped_column(Integer, default=30)
     task_date: Mapped[date] = mapped_column(Date, default=date.today)
     status: Mapped[str] = mapped_column(String(10), default="pending")
@@ -41,6 +41,7 @@ class LearningTask(Base):
     created_at: Mapped[datetime] = mapped_column(default=datetime.now)
 
     user: Mapped["User"] = relationship(back_populates="tasks")
+    resource: Mapped["Resource | None"] = relationship()
     check_ins: Mapped[list["CheckIn"]] = relationship(back_populates="task", cascade="all, delete-orphan")
 
 

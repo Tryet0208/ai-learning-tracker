@@ -3,31 +3,8 @@ from datetime import date
 from database import SessionLocal
 from models import User, LearningTask, Resource
 
-TASK_POOLS = {
-    "阅读": [
-        {"title": "阅读 Transformer 论文精读笔记", "estimated_minutes": 45},
-        {"title": "阅读 LangChain 官方文档一节", "estimated_minutes": 30},
-        {"title": "阅读一篇 AI 行业落地案例分析", "estimated_minutes": 30},
-        {"title": "阅读 Prompt Engineering Guide", "estimated_minutes": 40},
-        {"title": "阅读 OpenAI API 文档最新更新", "estimated_minutes": 25},
-        {"title": "阅读 RAG 技术原理与实践文章", "estimated_minutes": 35},
-        {"title": "阅读 AI Agent 架构设计文章", "estimated_minutes": 30},
-    ],
-    "实操": [
-        {"title": "用 LangChain 搭建一个简单 RAG 应用", "estimated_minutes": 60},
-        {"title": "编写一个 Prompt 模板工具", "estimated_minutes": 45},
-        {"title": "调用 OpenAI API 完成文本分类任务", "estimated_minutes": 45},
-        {"title": "搭建本地向量数据库并测试检索", "estimated_minutes": 50},
-        {"title": "实现一个简单的 AI Agent 对话机器人", "estimated_minutes": 60},
-        {"title": "用 Streamlit 搭建 AI 应用 Demo", "estimated_minutes": 50},
-    ],
-    "视频": [
-        {"title": "观看 LangChain 入门教程视频", "estimated_minutes": 30},
-        {"title": "观看 AI 大模型应用开发实战视频", "estimated_minutes": 45},
-        {"title": "观看 Prompt Engineering 技巧讲解", "estimated_minutes": 25},
-        {"title": "观看行业 AI 落地案例分享", "estimated_minutes": 40},
-    ],
-}
+# 任务类型 → 资源类型映射
+TYPE_MAP = {"阅读": "文章", "实操": "案例", "视频": "视频"}
 
 
 def generate_daily_tasks():
@@ -44,24 +21,24 @@ def generate_daily_tasks():
             if existing > 0:
                 continue
 
-            for task_type in ["阅读", "实操", "视频"]:
-                pool = TASK_POOLS.get(task_type, [])
-                if not pool:
-                    continue
-                item = random.choice(pool)
-                resource = (
+            for task_type, resource_type in TYPE_MAP.items():
+                resources = (
                     db.query(Resource)
-                    .filter(Resource.type == ("文章" if task_type == "阅读" else task_type))
-                    .first()
+                    .filter(Resource.type == resource_type)
+                    .all()
                 )
+                if not resources:
+                    continue
+
+                res = random.choice(resources)
 
                 task = LearningTask(
                     user_id=user.id,
-                    title=item["title"],
-                    description=f"今日{task_type}任务，预计用时{item['estimated_minutes']}分钟",
+                    title=res.title,
+                    description=f"今日{task_type}任务：{res.title}",
                     type=task_type,
-                    resource_id=resource.id if resource else None,
-                    estimated_minutes=item["estimated_minutes"],
+                    resource_id=res.id,
+                    estimated_minutes=30 if resource_type == "文章" else (45 if resource_type == "视频" else 60),
                     task_date=today,
                     is_auto_generated=True,
                 )

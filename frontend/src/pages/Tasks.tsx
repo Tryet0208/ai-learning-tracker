@@ -7,6 +7,9 @@ interface Task {
   title: string;
   description: string;
   type: string;
+  resource_id: number | null;
+  resource_title: string | null;
+  resource_url: string | null;
   estimated_minutes: number;
   task_date: string;
   status: string;
@@ -34,8 +37,12 @@ export default function Tasks() {
     fetchTasks();
   };
 
-  const handleComplete = async (id: number, notes: string, actual_minutes: number) => {
-    await api.patch(`/tasks/${id}/complete`, { notes, actual_minutes });
+  const handleComplete = async (id: number, notes: string) => {
+    const task = tasks.find((t) => t.id === id);
+    await api.patch(`/tasks/${id}/complete`, {
+      notes,
+      actual_minutes: task?.estimated_minutes ?? 30,
+    });
     fetchTasks();
   };
 

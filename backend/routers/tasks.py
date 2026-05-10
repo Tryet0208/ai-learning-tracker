@@ -54,6 +54,8 @@ def list_tasks(task_date: str | None = Query(None), db: Session = Depends(get_db
             "description": t.description,
             "type": t.type,
             "resource_id": t.resource_id,
+            "resource_title": t.resource.title if t.resource else None,
+            "resource_url": t.resource.url if t.resource else None,
             "estimated_minutes": t.estimated_minutes,
             "task_date": str(t.task_date),
             "status": t.status,
