@@ -39,10 +39,13 @@ export default function Tasks() {
 
   const handleComplete = async (id: number, notes: string) => {
     const task = tasks.find((t) => t.id === id);
-    await api.patch(`/tasks/${id}/complete`, {
+    const res = await api.patch(`/tasks/${id}/complete`, {
       notes,
       actual_minutes: task?.estimated_minutes ?? 30,
     });
+    if (res.data.level_up) {
+      alert(`🎉 恭喜升级到 ${res.data.current_level}！`);
+    }
     fetchTasks();
   };
 

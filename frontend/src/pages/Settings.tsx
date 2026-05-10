@@ -1,6 +1,18 @@
 import { useEffect, useState, useRef } from 'react';
 import api from '../api';
 
+const CAREER_OPTIONS = [
+  { value: 'AI+行业解决方案', label: '🏭 AI+行业解决方案' },
+  { value: 'AI应用开发工程师', label: '💻 AI应用开发工程师' },
+  { value: '通用学习', label: '📚 通用学习' },
+];
+
+const LEVEL_LABELS: Record<string, string> = {
+  '入门': '🌱 入门',
+  '进阶': '📈 进阶',
+  '高级': '🚀 高级',
+};
+
 interface Profile {
   nickname: string;
   avatar_path: string;
@@ -8,6 +20,9 @@ interface Profile {
   study_end_time: string;
   remind_enabled: boolean;
   remind_time: string;
+  current_level: string;
+  career_path: string;
+  level_progress: number;
 }
 
 export default function Settings() {
@@ -17,9 +32,14 @@ export default function Settings() {
   const [studyEnd, setStudyEnd] = useState('22:00');
   const [remindEnabled, setRemindEnabled] = useState(true);
   const [remindTime, setRemindTime] = useState('19:30');
+  const [careerPath, setCareerPath] = useState('AI+行业解决方案');
+  const [currentLevel, setCurrentLevel] = useState('入门');
+  const [levelProgress, setLevelProgress] = useState(0);
   const [appid, setAppid] = useState('');
   const [saved, setSaved] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  const LEVEL_MAX: Record<string, number> = { '入门': 5, '进阶': 10, '高级': 999 };
 
   useEffect(() => {
     api.get('/user/profile').then((res) => {
@@ -29,6 +49,9 @@ export default function Settings() {
       setStudyEnd(res.data.study_end_time);
       setRemindEnabled(res.data.remind_enabled);
       setRemindTime(res.data.remind_time);
+      setCareerPath(res.data.career_path || 'AI+行业解决方案');
+      setCurrentLevel(res.data.current_level || '入门');
+      setLevelProgress(res.data.level_progress || 0);
     });
   }, []);
 
@@ -39,6 +62,8 @@ export default function Settings() {
       study_end_time: studyEnd,
       remind_enabled: remindEnabled,
       remind_time: remindTime,
+      career_path: careerPath,
+      current_level: currentLevel,
     });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
@@ -84,6 +109,46 @@ export default function Settings() {
           />
           <p className="text-xs text-gray-400 mt-1">点击头像上传图片</p>
         </div>
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm space-y-3">
+        <h3 className="font-semibold">职业方向</h3>
+        <select
+          value={careerPath}
+          onChange={(e) => setCareerPath(e.target.value)}
+          className="border rounded-lg px-3 py-2 text-sm w-full"
+        >
+          {CAREER_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+        <p className="text-xs text-gray-400">系统会根据你的职业方向定制学习内容</p>
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm space-y-3">
+        <h3 className="font-semibold">学习等级</h3>
+        <div className="flex items-center gap-3">
+          <span className="text-sm">{LEVEL_LABELS[currentLevel] || currentLevel}</span>
+          <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
+            <div
+              className="h-full bg-indigo-500 rounded-full transition-all"
+              style={{ width: `${Math.min((levelProgress / LEVEL_MAX[currentLevel]) * 100, 100)}%` }}
+            />
+          </div>
+          <span className="text-xs text-gray-400">{levelProgress}/{LEVEL_MAX[currentLevel]}</span>
+        </div>
+        <p className="text-xs text-gray-400">
+          满 {LEVEL_MAX[currentLevel]} 天自动升级 · 也可手动切换
+        </p>
+        <select
+          value={currentLevel}
+          onChange={(e) => setCurrentLevel(e.target.value)}
+          className="border rounded-lg px-3 py-2 text-sm"
+        >
+          <option value="入门">🌱 入门</option>
+          <option value="进阶">📈 进阶</option>
+          <option value="高级">🚀 高级</option>
+        </select>
       </div>
 
       <div className="bg-white rounded-xl p-4 shadow-sm space-y-3">

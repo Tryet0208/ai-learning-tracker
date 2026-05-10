@@ -15,11 +15,21 @@ interface WeeklyStats {
   daily_data: DailyData[];
 }
 
+const LEVEL_LABELS: Record<string, string> = {
+  '入门': '🌱 入门',
+  '进阶': '📈 进阶',
+  '高级': '🚀 高级',
+};
+const LEVEL_MAX: Record<string, number> = { '入门': 5, '进阶': 10, '高级': 999 };
+
 interface UserProfile {
   nickname: string;
   streak_days: number;
   study_start_time: string;
   study_end_time: string;
+  current_level: string;
+  career_path: string;
+  level_progress: number;
 }
 
 const WEEKDAY_NAMES = ['一', '二', '三', '四', '五', '六', '日'];
@@ -58,6 +68,22 @@ export default function Dashboard() {
           </p>
         </div>
         <StreakBadge days={profile.streak_days} />
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-medium">{LEVEL_LABELS[profile.current_level] || profile.current_level}</span>
+          <span className="text-xs text-gray-400">{profile.level_progress}/{LEVEL_MAX[profile.current_level]} 天</span>
+        </div>
+        <div className="bg-gray-200 rounded-full h-2.5 overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-indigo-400 to-indigo-600 rounded-full transition-all"
+            style={{ width: `${Math.min((profile.level_progress / LEVEL_MAX[profile.current_level]) * 100, 100)}%` }}
+          />
+        </div>
+        <p className="text-xs text-gray-400 mt-1.5">
+          {profile.career_path} · 距下一级还需 {LEVEL_MAX[profile.current_level] - profile.level_progress} 天
+        </p>
       </div>
 
       <div className="grid grid-cols-3 gap-3">

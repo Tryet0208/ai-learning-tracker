@@ -18,13 +18,22 @@ class UserUpdate(BaseModel):
     study_end_time: str | None = None
     remind_enabled: bool | None = None
     remind_time: str | None = None
+    current_level: str | None = None
+    career_path: str | None = None
 
 
 @router.get("/profile")
 def get_profile(db: Session = Depends(get_db)):
     user = db.query(User).first()
     if not user:
-        user = User(nickname="学习者", study_start_time="20:00", study_end_time="22:00")
+        user = User(
+            nickname="学习者",
+            study_start_time="20:00",
+            study_end_time="22:00",
+            current_level="入门",
+            career_path="AI+行业解决方案",
+            level_progress=0,
+        )
         db.add(user)
         db.commit()
         db.refresh(user)
@@ -37,6 +46,9 @@ def get_profile(db: Session = Depends(get_db)):
         "streak_days": user.streak_days,
         "remind_enabled": user.remind_enabled,
         "remind_time": user.remind_time,
+        "current_level": user.current_level,
+        "career_path": user.career_path,
+        "level_progress": user.level_progress,
     }
 
 

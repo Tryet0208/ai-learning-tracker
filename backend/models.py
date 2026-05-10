@@ -17,6 +17,9 @@ class User(Base):
     streak_days: Mapped[int] = mapped_column(Integer, default=0)
     remind_enabled: Mapped[bool] = mapped_column(Boolean, default=True)
     remind_time: Mapped[str] = mapped_column(String(5), default="19:30")
+    current_level: Mapped[str] = mapped_column(String(10), default="入门")
+    career_path: Mapped[str] = mapped_column(String(50), default="AI+行业解决方案")
+    level_progress: Mapped[int] = mapped_column(Integer, default=0)
     created_at: Mapped[datetime] = mapped_column(default=datetime.now)
 
     tasks: Mapped[list["LearningTask"]] = relationship(back_populates="user", cascade="all, delete-orphan")

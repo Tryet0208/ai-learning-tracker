@@ -130,9 +130,41 @@ def complete_task(task_id: int, data: CompleteNote, db: Session = Depends(get_db
         user.streak_days += 1
     else:
         user.streak_days = 1
+
+    # 检查今天所有任务是否都已完成
+    today_tasks = (
+        db.query(LearningTask)
+        .filter(LearningTask.user_id == user.id, LearningTask.task_date == today)
+        .all()
+    )
+    all_done = all(t.status == "completed" for t in today_tasks)
+    if all_done:
+        user.level_progress += 1
+        # 自动升级判定
+        LEVEL_THRESHOLDS = {"入门": 5, "进阶": 10}
+        next_levels = {"入门": "进阶", "进阶": "高级"}
+        threshold = LEVEL_THRESHOLDS.get(user.current_level)
+        if threshold and user.level_progress >= threshold:
+            user.current_level = next_levels.get(user.current_level, user.current_level)
+            user.level_progress = 0
+            level_up = True
+        else:
+            level_up = False
+    else:
+        level_up = False
+
     db.commit()
 
-    return {"message": "打卡成功", "streak_days": user.streak_days}
+    result = {
+        "message": "打卡成功",
+        "streak_days": user.streak_days,
+        "current_level": user.current_level,
+        "level_progress": user.level_progress,
+    }
+    if level_up:
+        result["level_up"] = True
+        result["message"] = f"🎉 恭喜升级到 {user.current_level}！"
+    return result
 
 
 @router.delete("/{task_id}")
