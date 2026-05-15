@@ -20,9 +20,10 @@ interface Props {
   icon: string;
   onComplete: (id: number, notes: string) => void;
   onDelete: (id: number) => void;
+  onReset: (id: number) => void;
 }
 
-export default function TaskCard({ task, icon, onComplete, onDelete }: Props) {
+export default function TaskCard({ task, icon, onComplete, onDelete, onReset }: Props) {
   const [studying, setStudying] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
   const [notes, setNotes] = useState('');
@@ -84,6 +85,14 @@ export default function TaskCard({ task, icon, onComplete, onDelete }: Props) {
                 className="bg-green-500 text-white px-3 py-1 rounded-lg text-xs font-medium hover:bg-green-600 animate-pulse"
               >
                 ✅ 我学完了
+              </button>
+            )}
+            {completed && (
+              <button
+                onClick={() => onReset(task.id)}
+                className="bg-amber-100 text-amber-700 px-2 py-1 rounded-lg text-xs font-medium hover:bg-amber-200"
+              >
+                🔄 重学
               </button>
             )}
             <button onClick={() => onDelete(task.id)} className="text-red-400 text-lg leading-none" title="删除">

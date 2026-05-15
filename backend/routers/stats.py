@@ -4,23 +4,13 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 from database import get_db
 from models import User, CheckIn, LearningTask
+from services.auth import get_current_user
 
 router = APIRouter()
 
 
-def get_or_create_user(db: Session) -> User:
-    user = db.query(User).first()
-    if not user:
-        user = User()
-        db.add(user)
-        db.commit()
-        db.refresh(user)
-    return user
-
-
 @router.get("/weekly")
-def weekly_stats(db: Session = Depends(get_db)):
-    user = get_or_create_user(db)
+def weekly_stats(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     today = date.today()
     week_start = today - timedelta(days=today.weekday())
 
@@ -50,8 +40,11 @@ def weekly_stats(db: Session = Depends(get_db)):
 
 
 @router.get("/calendar")
-def calendar_stats(month: str | None = Query(None), db: Session = Depends(get_db)):
-    user = get_or_create_user(db)
+def calendar_stats(
+    month: str | None = Query(None),
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     if month:
         parts = month.split("-")
         year, m = int(parts[0]), int(parts[1])
@@ -73,6 +66,5 @@ def calendar_stats(month: str | None = Query(None), db: Session = Depends(get_db
 
 
 @router.get("/streak")
-def streak(db: Session = Depends(get_db)):
-    user = get_or_create_user(db)
+def streak(user: User = Depends(get_current_user)):
     return {"streak_days": user.streak_days}

@@ -23,6 +23,8 @@ interface Profile {
   current_level: string;
   career_path: string;
   level_progress: number;
+  current_week: number;
+  curriculum_started_at: string | null;
 }
 
 export default function Settings() {
@@ -35,7 +37,10 @@ export default function Settings() {
   const [careerPath, setCareerPath] = useState('AI+行业解决方案');
   const [currentLevel, setCurrentLevel] = useState('入门');
   const [levelProgress, setLevelProgress] = useState(0);
+  const [currentWeek, setCurrentWeek] = useState(1);
   const [appid, setAppid] = useState('');
+  const [newCode, setNewCode] = useState('');
+  const [codeMsg, setCodeMsg] = useState('');
   const [saved, setSaved] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -52,6 +57,7 @@ export default function Settings() {
       setCareerPath(res.data.career_path || 'AI+行业解决方案');
       setCurrentLevel(res.data.current_level || '入门');
       setLevelProgress(res.data.level_progress || 0);
+      setCurrentWeek(res.data.current_week || 1);
     });
   }, []);
 
@@ -64,6 +70,7 @@ export default function Settings() {
       remind_time: remindTime,
       career_path: careerPath,
       current_level: currentLevel,
+      current_week: currentWeek,
     });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
@@ -76,6 +83,13 @@ export default function Settings() {
     formData.append('file', file);
     const res = await api.post('/user/avatar', formData);
     setProfile((prev) => prev ? { ...prev, avatar_path: res.data.avatar_path } : null);
+  };
+
+  const handleChangeCode = async () => {
+    if (!newCode.trim()) { setCodeMsg('请输入新访问码'); return; }
+    const res = await api.put('/auth/change-code', { new_code: newCode.trim() });
+    if (res.data.error) { setCodeMsg(res.data.error); }
+    else { setCodeMsg('访问码已更新'); setNewCode(''); setTimeout(() => setCodeMsg(''), 2000); }
   };
 
   const handleBindWechat = async () => {
@@ -126,6 +140,30 @@ export default function Settings() {
       </div>
 
       <div className="bg-white rounded-xl p-4 shadow-sm space-y-3">
+        <h3 className="font-semibold">课程周数</h3>
+        <div className="flex items-center gap-3">
+          <span className="text-sm">第</span>
+          <select
+            value={currentWeek}
+            onChange={(e) => setCurrentWeek(Number(e.target.value))}
+            className="border rounded-lg px-3 py-2 text-sm"
+          >
+            {Array.from({ length: 12 }, (_, i) => (
+              <option key={i + 1} value={i + 1}>第 {i + 1} 周</option>
+            ))}
+          </select>
+          <span className="text-sm">/ 12 周</span>
+        </div>
+        <div className="bg-gray-200 rounded-full h-2.5 overflow-hidden">
+          <div
+            className="h-full bg-emerald-500 rounded-full transition-all"
+            style={{ width: `${(currentWeek / 12) * 100}%` }}
+          />
+        </div>
+        <p className="text-xs text-gray-400">手动调整当前学习周数，系统将按该周内容生成每日任务</p>
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm space-y-3">
         <h3 className="font-semibold">学习等级</h3>
         <div className="flex items-center gap-3">
           <span className="text-sm">{LEVEL_LABELS[currentLevel] || currentLevel}</span>
@@ -170,6 +208,23 @@ export default function Settings() {
         </label>
         <input type="time" value={remindTime} onChange={(e) => setRemindTime(e.target.value)}
           className="border rounded-lg px-3 py-2 text-sm" />
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm space-y-3">
+        <h3 className="font-semibold">修改访问码</h3>
+        <div className="flex gap-2">
+          <input
+            type="password"
+            value={newCode}
+            onChange={(e) => { setNewCode(e.target.value); setCodeMsg(''); }}
+            placeholder="设置新的访问码"
+            className="border rounded-lg px-3 py-2 text-sm flex-1"
+          />
+          <button onClick={handleChangeCode} className="bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap">
+            修改
+          </button>
+        </div>
+        {codeMsg && <p className={`text-xs ${codeMsg.includes('失败') || codeMsg.includes('已被') ? 'text-red-400' : 'text-green-500'}`}>{codeMsg}</p>}
       </div>
 
       <div className="bg-white rounded-xl p-4 shadow-sm space-y-3">

@@ -33,7 +33,7 @@ export default function Tasks() {
   useEffect(() => { fetchTasks(); }, [date]);
 
   const handleGenerate = async () => {
-    await api.post('/tasks/generate');
+    await api.post('/tasks/generate', null, { params: { task_date: date } });
     fetchTasks();
   };
 
@@ -51,6 +51,11 @@ export default function Tasks() {
 
   const handleDelete = async (id: number) => {
     await api.delete(`/tasks/${id}`);
+    fetchTasks();
+  };
+
+  const handleReset = async (id: number) => {
+    await api.patch(`/tasks/${id}/reset`);
     fetchTasks();
   };
 
@@ -119,6 +124,7 @@ export default function Tasks() {
             icon={TYPE_ICONS[task.type] || '📌'}
             onComplete={handleComplete}
             onDelete={handleDelete}
+            onReset={handleReset}
           />
         ))}
       </div>

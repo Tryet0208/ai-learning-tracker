@@ -1,0 +1,1523 @@
+{
+  "weeks": [
+    {
+      "week": 1,
+      "theme": "什么是大语言模型",
+      "goal": "建立对AI和大语言模型的基本认知，了解行业应用全景",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "大语言模型从零到一：什么是LLM",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "什么是大语言模型（CSDN通俗版）",
+                "url": "https://so.csdn.net/so/search?q=什么是大语言模型",
+                "tags": "LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "注册通义千问/文心一言并完成第一次对话",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "通义千问官网",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "LLM,实操,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：AI大模型是什么（通俗版）",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "【科普】大模型是什么东西？B站通俗解读",
+                "url": "https://search.bilibili.com/all?keyword=科普大模型是什么东西？B站通俗解读",
+                "tags": "LLM,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "GPT、文心、通义：主流大模型概览",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "国内主流大模型对比（掘金文章）",
+                "url": "https://juejin.cn/search?query=国内主流大模型对比",
+                "tags": "LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "对比三个AI助手的回答差异",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "文心一言",
+                "url": "https://yiyan.baidu.com/",
+                "tags": "LLM,实操,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：AI如何改变传统行业",
+              "estimated_minutes": 20,
+              "resource": {
+                "title": "AI赋能千行百业（B站案例集）",
+                "url": "https://search.bilibili.com/all?keyword=AI赋能千行百业（B站案例集）",
+                "tags": "案例,行业,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "AI在水利/工程领域的应用案例",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "人工智能在水利行业的应用综述（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=人工智能在水利行业的应用综述",
+                "tags": "案例,行业,水利,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用AI总结一篇水利工程论文摘要",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "Kimi Chat 长文阅读助手",
+                "url": "https://kimi.moonshot.cn/",
+                "tags": "LLM,实操,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：零基础如何入门AI",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "2024零基础AI入门指南（B站）",
+                "url": "https://search.bilibili.com/all?keyword=2024零基础AI入门指南",
+                "tags": "LLM,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "theme": "Prompt Engineering 入门",
+      "goal": "掌握提示词工程基础，学会有效与AI沟通",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "Prompt Engineering 入门指南",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "Prompt工程完全指南（中文版）",
+                "url": "https://www.promptingguide.ai/zh",
+                "tags": "Prompt,LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "练习5种基本Prompt技巧",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "通义千问",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "Prompt,实操,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：Prompt工程核心技巧",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "Prompt Engineering 入门教程（B站）",
+                "url": "https://search.bilibili.com/all?keyword=Prompt Engineering 入门教程",
+                "tags": "Prompt,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "角色扮演Prompt：让AI成为你的专家助手",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "Prompt角色扮演技巧（掘金）",
+                "url": "https://juejin.cn/search?query=Prompt角色扮演技巧",
+                "tags": "Prompt,LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "设计一个「水利工程助手」Prompt",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "文心一言",
+                "url": "https://yiyan.baidu.com/",
+                "tags": "Prompt,实操,水利,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：如何写好Prompt",
+              "estimated_minutes": 20,
+              "resource": {
+                "title": "写好Prompt的10个技巧（B站）",
+                "url": "https://search.bilibili.com/all?keyword=写好Prompt的10个技巧",
+                "tags": "Prompt,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "Few-shot与Chain-of-Thought提示",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "思维链Prompt技术详解（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=思维链Prompt技术详解",
+                "tags": "Prompt,LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用Few-shot Prompt让AI完成工程数据处理",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "通义千问",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "Prompt,实操,水利,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：Chain-of-Thought原理与实战",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "思维链提示实战教程（B站）",
+                "url": "https://search.bilibili.com/all?keyword=思维链提示实战教程",
+                "tags": "Prompt,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "theme": "API 调用与开发基础",
+      "goal": "学会通过API调用大模型，完成基础的AI应用开发",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "什么是API？大模型API调用原理",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "大模型API调用入门（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=大模型API调用入门",
+                "tags": "API,LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "获取通义千问API Key并完成第一次调用",
+              "estimated_minutes": 40,
+              "resource": {
+                "title": "阿里云百炼平台",
+                "url": "https://bailian.console.aliyun.com/",
+                "tags": "API,实操,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：大模型API调用的正确姿势",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "API调用实战教程（B站）",
+                "url": "https://search.bilibili.com/all?keyword=API调用实战教程",
+                "tags": "API,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "Python调用大模型API完整教程",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "Python调用通义千问API（掘金）",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "API,Python,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "编写一个Python脚本调用AI处理文本",
+              "estimated_minutes": 45,
+              "resource": {
+                "title": "通义千问API文档",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "API,实操,Python,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：Python+AI开发实战",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "用Python调用大模型（B站）",
+                "url": "https://search.bilibili.com/all?keyword=用Python调用大模型",
+                "tags": "API,Python,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "API调用的最佳实践与常见问题",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "大模型API开发避坑指南（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=大模型API开发避坑指南",
+                "tags": "API,LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "实现一个简易AI对话窗口（Python命令行版）",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "阿里云百炼SDK文档",
+                "url": "https://bailian.console.aliyun.com/",
+                "tags": "API,实操,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：30分钟搭建一个AI应用",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "快速搭建AI应用（B站）",
+                "url": "https://search.bilibili.com/all?keyword=快速搭建AI应用",
+                "tags": "API,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "theme": "动手构建第一个 AI 应用",
+      "goal": "综合前三周知识，构建一个完整的AI小应用",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "AI应用架构设计基础",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "从零设计一个AI应用（掘金）",
+                "url": "https://juejin.cn/search?query=从零设计一个AI应用",
+                "tags": "实操,LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "搭建项目框架：需求分析与功能设计",
+              "estimated_minutes": 40,
+              "resource": {
+                "title": "通义灵码（AI编程助手）",
+                "url": "https://tongyi.aliyun.com/lingma",
+                "tags": "实操,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：如何从零想出一个AI产品",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "AI产品设计思路（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI产品设计思路",
+                "tags": "实操,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "使用Gradio/Streamlit搭建AI应用界面",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "Streamlit入门教程（CSDN）",
+                "url": "https://docs.streamlit.io/",
+                "tags": "实操,Streamlit,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用Streamlit+通义API搭建第一个Web AI应用",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "Streamlit官方文档中文版",
+                "url": "https://docs.streamlit.io/",
+                "tags": "实操,Streamlit,API,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：20分钟学会Streamlit",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "Streamlit极速入门（B站）",
+                "url": "https://docs.streamlit.io/",
+                "tags": "Streamlit,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "AI应用开发中的调试与优化",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "AI应用调试技巧（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=AI应用调试技巧",
+                "tags": "实操,LLM,入门",
+                "difficulty": "入门",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "完善你的AI应用并添加错误处理",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "通义灵码",
+                "url": "https://tongyi.aliyun.com/lingma",
+                "tags": "实操,入门",
+                "difficulty": "入门",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "总结：月1学习回顾与梳理",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "LLM应用开发知识体系梳理（B站）",
+                "url": "https://search.bilibili.com/all?keyword=LLM应用开发知识体系梳理",
+                "tags": "LLM,视频,入门",
+                "difficulty": "入门",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "theme": "LangChain 框架入门",
+      "goal": "掌握LangChain核心概念：Chain、Prompt Template、Tool",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "LangChain是什么？核心概念一文读懂",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "LangChain核心概念详解（CSDN）",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,LLM,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "安装LangChain并运行第一个Chain",
+              "estimated_minutes": 45,
+              "resource": {
+                "title": "LangChain中文文档",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,实操,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：LangChain从零入门",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "LangChain入门教程（B站）",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "Prompt Template与Output Parser",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "LangChain Prompt Template教程（掘金）",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,Prompt,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用LangChain重构之前的API调用代码",
+              "estimated_minutes": 45,
+              "resource": {
+                "title": "LangChain中文文档",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,实操,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：LangChain实战项目",
+              "estimated_minutes": 40,
+              "resource": {
+                "title": "LangChain实战（B站）",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "LangChain的Tool与Agent概念",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "LangChain Agent入门（知乎）",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,Agent,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "创建一个带搜索工具的LangChain Agent",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "LangChain中文文档",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,Agent,实操,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：LangChain Agent开发",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "LangChain Agent教程（B站）",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "LangChain,Agent,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "theme": "RAG 技术入门",
+      "goal": "理解检索增强生成原理，搭建一个简单的RAG系统",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "RAG技术原理：为什么大模型需要外挂知识库",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "RAG技术详解（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=RAG技术详解",
+                "tags": "RAG,LLM,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "搭建一个简易RAG系统（基于LangChain）",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "LangChain RAG教程",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "RAG,LangChain,实操,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：RAG技术从原理到实战",
+              "estimated_minutes": 40,
+              "resource": {
+                "title": "RAG原理与实战（B站）",
+                "url": "https://search.bilibili.com/all?keyword=RAG原理与实战",
+                "tags": "RAG,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "Embedding与向量数据库入门",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "向量数据库入门（掘金）",
+                "url": "https://juejin.cn/search?query=向量数据库入门",
+                "tags": "RAG,向量数据库,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用ChromaDB存储和检索文档向量",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "ChromaDB官方文档",
+                "url": "https://docs.trychroma.com/",
+                "tags": "RAG,实操,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：向量数据库选型与实战",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "向量数据库入门（B站）",
+                "url": "https://search.bilibili.com/all?keyword=向量数据库入门",
+                "tags": "RAG,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "RAG在企业中的应用案例",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "企业级RAG应用案例（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=企业级RAG应用案例",
+                "tags": "RAG,案例,行业,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "将水利工程文档做成可问答的知识库",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "LangChain RAG教程",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "RAG,实操,水利,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：RAG企业级应用案例",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "企业RAG应用实战（B站）",
+                "url": "https://search.bilibili.com/all?keyword=企业RAG应用实战",
+                "tags": "RAG,案例,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "theme": "AI+行业案例深度研究",
+      "goal": "深入研究AI在水利/工程领域的真实落地案例",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "智慧水利：AI在水资源管理中的应用",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "智慧水利发展现状（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=智慧水利发展现状",
+                "tags": "案例,行业,水利,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用AI分析一篇水利论文的研究方法",
+              "estimated_minutes": 40,
+              "resource": {
+                "title": "Kimi Chat",
+                "url": "https://kimi.moonshot.cn/",
+                "tags": "实操,水利,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：智慧水利方案解读",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "智慧水利解决方案（B站）",
+                "url": "https://search.bilibili.com/all?keyword=智慧水利解决方案",
+                "tags": "案例,水利,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "数字孪生流域：技术架构与实践",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "数字孪生水利技术（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=数字孪生水利技术",
+                "tags": "案例,行业,水利,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "设计一个水利数据AI分析方案",
+              "estimated_minutes": 45,
+              "resource": {
+                "title": "通义千问",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "实操,水利,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：数字孪生与AI融合",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "数字孪生技术解读（B站）",
+                "url": "https://search.bilibili.com/all?keyword=数字孪生技术解读",
+                "tags": "案例,行业,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "AI在灾害预警中的应用",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "AI洪水预警系统（掘金）",
+                "url": "https://juejin.cn/search?query=AI洪水预警系统",
+                "tags": "案例,行业,水利,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用Python+AI进行水文数据预处理",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "通义千问API",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "实操,水利,Python,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：AI+水利实战案例",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "AI赋能水利行业（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI赋能水利行业",
+                "tags": "案例,水利,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "theme": "向量数据库与知识库构建",
+      "goal": "掌握向量数据库技术，构建专业领域知识库",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "主流向量数据库对比：Faiss/Milvus/Chroma",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "向量数据库选型指南（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=向量数据库选型指南",
+                "tags": "向量数据库,RAG,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "安装Milvus Lite并创建第一个向量集合",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "Milvus官方文档",
+                "url": "https://milvus.io/docs/zh/",
+                "tags": "向量数据库,实操,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：向量数据库原理与实战",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "向量数据库教程（B站）",
+                "url": "https://search.bilibili.com/all?keyword=向量数据库教程",
+                "tags": "向量数据库,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "文档切分策略：如何分块效果最好",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "RAG文档切分技巧（掘金）",
+                "url": "https://juejin.cn/search?query=RAG文档切分技巧",
+                "tags": "RAG,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "将水利工程规范文档向量化并存储",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "LangChain中文文档",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "RAG,实操,水利,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：知识库构建全流程",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "企业知识库搭建（B站）",
+                "url": "https://search.bilibili.com/all?keyword=企业知识库搭建",
+                "tags": "RAG,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "知识库的评估与优化",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "RAG评估方法（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=RAG评估方法",
+                "tags": "RAG,进阶",
+                "difficulty": "进阶",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "测试并优化你的水利知识库问答效果",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "LangSmith（可观测性平台）",
+                "url": "https://smith.langchain.com/",
+                "tags": "RAG,实操,进阶",
+                "difficulty": "进阶",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：月2知识体系总结",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "RAG+Agent知识体系（B站）",
+                "url": "https://search.bilibili.com/all?keyword=RAG+Agent知识体系",
+                "tags": "RAG,LangChain,视频,进阶",
+                "difficulty": "进阶",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "theme": "AI Agent 开发入门",
+      "goal": "理解Agent概念，学会构建多工具协作的AI智能体",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "什么是AI Agent？从原理到应用",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "AI Agent入门指南（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=AI Agent入门指南",
+                "tags": "Agent,LLM,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用LangChain创建第一个Agent",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "LangChain Agent文档",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "Agent,LangChain,实操,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：AI Agent开发实战",
+              "estimated_minutes": 40,
+              "resource": {
+                "title": "AI Agent开发（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI Agent开发",
+                "tags": "Agent,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "多Agent协作：AutoGen与CrewAI对比",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "多Agent框架对比（掘金）",
+                "url": "https://juejin.cn/search?query=多Agent框架对比",
+                "tags": "Agent,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用CrewAI搭建一个多Agent协作任务",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "CrewAI中文教程",
+                "url": "https://github.com/crewAIInc/crewAI",
+                "tags": "Agent,实操,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：CrewAI多智能体实战",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "CrewAI教程（B站）",
+                "url": "https://search.bilibili.com/all?keyword=CrewAI教程",
+                "tags": "Agent,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "Agent在行业中的应用场景",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "AI Agent行业应用（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=AI Agent行业应用",
+                "tags": "Agent,案例,行业,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "设计一个水利工程Agent方案",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "通义千问",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "Agent,实操,水利,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：Agent在垂直行业的落地",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "行业Agent落地案例（B站）",
+                "url": "https://search.bilibili.com/all?keyword=行业Agent落地案例",
+                "tags": "Agent,案例,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "theme": "水利+AI 项目实战（上）",
+      "goal": "将AI技术应用到水利工程实际场景，完成项目前半部分",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "水利数据的特点与AI适配方法",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "水利数据AI处理方法（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=水利数据AI处理方法",
+                "tags": "水利,实操,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "收集并整理一份水利工程数据集",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "和鲸社区（数据科学平台）",
+                "url": "https://www.heywhale.com/",
+                "tags": "水利,实操,数据,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：水利数据+AI分析实战",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "水利大数据分析（B站）",
+                "url": "https://search.bilibili.com/all?keyword=水利大数据分析",
+                "tags": "水利,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "用AI进行水文时间序列预测",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "时间序列AI预测（掘金）",
+                "url": "https://juejin.cn/search?query=时间序列AI预测",
+                "tags": "水利,实操,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "搭建一个水位预测AI模型原型",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "阿里云百炼平台",
+                "url": "https://bailian.console.aliyun.com/",
+                "tags": "水利,实操,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：AI在水利预测中的应用",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "AI水位预测（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI水位预测",
+                "tags": "水利,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "智能化水闸调度：算法与方案",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "智能水闸AI方案（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=智能水闸AI方案",
+                "tags": "水利,实操,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "用AI优化水闸调度参数",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "通义千问API",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "水利,实操,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：智慧水利项目案例",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "智慧水利项目全流程（B站）",
+                "url": "https://search.bilibili.com/all?keyword=智慧水利项目全流程",
+                "tags": "水利,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "theme": "水利+AI 项目实战（下）",
+      "goal": "完成水利AI项目，整合RAG+Agent技术",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "将RAG和Agent整合到一个水利应用中",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "RAG+Agent整合方案（掘金）",
+                "url": "https://juejin.cn/search?query=RAG+Agent整合方案",
+                "tags": "RAG,Agent,水利,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "搭建水利智能问答+数据分析Agent",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "LangChain+通义API",
+                "url": "https://python.langchain.com/docs/get_started/introduction",
+                "tags": "RAG,Agent,实操,水利,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：RAG+Agent联合实战",
+              "estimated_minutes": 40,
+              "resource": {
+                "title": "RAG+Agent综合项目（B站）",
+                "url": "https://search.bilibili.com/all?keyword=RAG+Agent综合项目",
+                "tags": "RAG,Agent,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "AI应用部署与上线流程",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "AI应用部署教程（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=AI应用部署教程",
+                "tags": "部署,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "将你的水利AI应用部署到云端",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "阿里云函数计算FC",
+                "url": "https://free.aliyun.com/",
+                "tags": "部署,实操,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：AI应用部署全流程",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "AI应用部署教程（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI应用部署教程",
+                "tags": "部署,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "AI项目总结与复盘方法",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "技术项目复盘模板（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=技术项目复盘模板",
+                "tags": "总结,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "完善项目文档并整理学习笔记",
+              "estimated_minutes": 50,
+              "resource": {
+                "title": "通义千问",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "总结,实操,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：如何做好技术项目复盘",
+              "estimated_minutes": 25,
+              "resource": {
+                "title": "技术复盘方法论（B站）",
+                "url": "https://search.bilibili.com/all?keyword=技术复盘方法论",
+                "tags": "总结,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "theme": "综合项目与未来规划",
+      "goal": "完成综合项目展示，规划下一步学习方向",
+      "days": [
+        {
+          "day": 1,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "AI+水利行业前沿趋势",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "2024 AI+水利发展报告（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=2024 AI+水利发展报告",
+                "tags": "水利,行业,总结,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "制作项目展示PPT/网页",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "通义千问（辅助制作）",
+                "url": "https://tongyi.aliyun.com/",
+                "tags": "总结,实操,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：AI行业发展趋势",
+              "estimated_minutes": 30,
+              "resource": {
+                "title": "2024AI行业趋势（B站）",
+                "url": "https://search.bilibili.com/all?keyword=2024AI行业趋势",
+                "tags": "行业,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "tasks": [
+            {
+              "type": "阅读",
+              "title": "AI学习的下一阶段：模型训练与微调",
+              "estimated_minutes": 35,
+              "resource": {
+                "title": "模型微调入门（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=模型微调入门",
+                "tags": "微调,LLM,高级",
+                "difficulty": "高级",
+                "type": "文章"
+              }
+            },
+            {
+              "type": "实操",
+              "title": "在ModelScope上尝试模型微调Demo",
+              "estimated_minutes": 60,
+              "resource": {
+                "title": "魔搭社区 ModelScope",
+                "url": "https://www.modelscope.cn/",
+                "tags": "微调,实操,高级",
+                "difficulty": "高级",
+                "type": "案例"
+              }
+            },
+            {
+              "type": "视频",
+              "title": "观看：3个月课程总结与新起点",
+              "estimated_minutes": 40,
+              "resource": {
+                "title": "AI学习路径规划（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI学习路径规划",
+                "tags": "总结,视频,高级",
+                "difficulty": "高级",
+                "type": "视频"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

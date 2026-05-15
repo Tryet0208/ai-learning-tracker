@@ -30,6 +30,8 @@ interface UserProfile {
   current_level: string;
   career_path: string;
   level_progress: number;
+  current_week: number;
+  curriculum_started_at: string | null;
 }
 
 const WEEKDAY_NAMES = ['一', '二', '三', '四', '五', '六', '日'];
@@ -84,6 +86,22 @@ export default function Dashboard() {
         <p className="text-xs text-gray-400 mt-1.5">
           {profile.career_path} · 距下一级还需 {LEVEL_MAX[profile.current_level] - profile.level_progress} 天
         </p>
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-medium">📅 课程进度</span>
+          <span className="text-xs text-gray-400">第 {profile.current_week}/12 周</span>
+        </div>
+        <div className="bg-gray-200 rounded-full h-2.5 overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full transition-all"
+            style={{ width: `${(profile.current_week / 12) * 100}%` }}
+          />
+        </div>
+        {profile.curriculum_started_at && (
+          <p className="text-xs text-gray-400 mt-1.5">课程开始于 {profile.curriculum_started_at}</p>
+        )}
       </div>
 
       <div className="grid grid-cols-3 gap-3">

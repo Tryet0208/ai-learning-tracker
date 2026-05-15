@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from database import get_db
 from models import User
+from services.auth import get_current_user
 
 router = APIRouter()
 
@@ -20,23 +21,11 @@ class UserUpdate(BaseModel):
     remind_time: str | None = None
     current_level: str | None = None
     career_path: str | None = None
+    current_week: int | None = None
 
 
 @router.get("/profile")
-def get_profile(db: Session = Depends(get_db)):
-    user = db.query(User).first()
-    if not user:
-        user = User(
-            nickname="学习者",
-            study_start_time="20:00",
-            study_end_time="22:00",
-            current_level="入门",
-            career_path="AI+行业解决方案",
-            level_progress=0,
-        )
-        db.add(user)
-        db.commit()
-        db.refresh(user)
+def get_profile(user: User = Depends(get_current_user)):
     return {
         "id": user.id,
         "nickname": user.nickname,
@@ -49,15 +38,13 @@ def get_profile(db: Session = Depends(get_db)):
         "current_level": user.current_level,
         "career_path": user.career_path,
         "level_progress": user.level_progress,
+        "current_week": user.current_week,
+        "curriculum_started_at": str(user.curriculum_started_at) if user.curriculum_started_at else None,
     }
 
 
 @router.put("/profile")
-def update_profile(data: UserUpdate, db: Session = Depends(get_db)):
-    user = db.query(User).first()
-    if not user:
-        user = User()
-        db.add(user)
+def update_profile(data: UserUpdate, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     update_data = data.model_dump(exclude_none=True)
     for key, value in update_data.items():
         setattr(user, key, value)
@@ -67,7 +54,11 @@ def update_profile(data: UserUpdate, db: Session = Depends(get_db)):
 
 
 @router.post("/avatar")
-async def upload_avatar(file: UploadFile = File(...), db: Session = Depends(get_db)):
+async def upload_avatar(
+    file: UploadFile = File(...),
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
     ext = file.filename.split(".")[-1] if file.filename else "png"
     filename = f"{uuid.uuid4().hex}.{ext}"
@@ -77,9 +68,7 @@ async def upload_avatar(file: UploadFile = File(...), db: Session = Depends(get_
     with open(filepath, "wb") as f:
         f.write(content)
 
-    user = db.query(User).first()
-    if user:
-        user.avatar_path = f"/uploads/avatars/{filename}"
-        db.commit()
+    user.avatar_path = f"/uploads/avatars/{filename}"
+    db.commit()
 
     return {"avatar_path": f"/uploads/avatars/{filename}"}

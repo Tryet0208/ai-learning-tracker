@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
-from routers import user, tasks, resources, stats, wechat
+from routers import user, tasks, resources, stats, wechat, auth
 from services.scheduler import start_scheduler
 
 
@@ -29,6 +29,7 @@ app.include_router(tasks.router, prefix="/api/tasks", tags=["任务"])
 app.include_router(resources.router, prefix="/api/resources", tags=["资源"])
 app.include_router(stats.router, prefix="/api/stats", tags=["统计"])
 app.include_router(wechat.router, prefix="/api/wechat", tags=["微信"])
+app.include_router(auth.router, prefix="/api/auth", tags=["认证"])
 
 
 @app.get("/api/health")

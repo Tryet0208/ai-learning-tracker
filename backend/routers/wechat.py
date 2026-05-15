@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from database import get_db
 from models import User
+from services.auth import get_current_user
 
 router = APIRouter()
 
@@ -18,11 +19,11 @@ class RemindSetting(BaseModel):
 
 
 @router.post("/bind")
-def bind_wechat(data: WechatBind, db: Session = Depends(get_db)):
-    user = db.query(User).first()
-    if not user:
-        user = User()
-        db.add(user)
+def bind_wechat(
+    data: WechatBind,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     user.wechat_appid = data.appid
     user.wechat_openid = data.openid or ""
     db.commit()
@@ -30,11 +31,11 @@ def bind_wechat(data: WechatBind, db: Session = Depends(get_db)):
 
 
 @router.put("/remind-setting")
-def update_remind(data: RemindSetting, db: Session = Depends(get_db)):
-    user = db.query(User).first()
-    if not user:
-        user = User()
-        db.add(user)
+def update_remind(
+    data: RemindSetting,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     user.remind_enabled = data.remind_enabled
     user.remind_time = data.remind_time
     db.commit()
@@ -42,10 +43,7 @@ def update_remind(data: RemindSetting, db: Session = Depends(get_db)):
 
 
 @router.get("/status")
-def wechat_status(db: Session = Depends(get_db)):
-    user = db.query(User).first()
-    if not user:
-        return {"bound": False}
+def wechat_status(user: User = Depends(get_current_user)):
     return {
         "bound": bool(user.wechat_appid),
         "appid": user.wechat_appid[:8] + "****" if user.wechat_appid else "",

@@ -1,141 +1,86 @@
-import random
+import json
 from datetime import date
+from pathlib import Path
 from database import SessionLocal
 from models import User, LearningTask, Resource
 
-# 任务类型 → 资源类型映射
-TYPE_MAP = {"阅读": "文章", "实操": "案例", "视频": "视频"}
-
-# 职业路径 → 各阶段优先标签
-PATH_TAGS = {
-    "AI+行业解决方案": {
-        "入门": ["LLM", "API", "Prompt", "入门"],
-        "进阶": ["案例", "行业", "RAG", "水利"],
-        "高级": ["实操", "Agent", "LangChain", "行业"],
-    },
-    "AI应用开发工程师": {
-        "入门": ["LLM", "API", "Prompt", "入门"],
-        "进阶": ["LangChain", "RAG", "实操"],
-        "高级": ["Agent", "AutoGen", "LangGraph"],
-    },
-    "通用学习": {
-        "入门": ["LLM", "API", "Prompt"],
-        "进阶": ["RAG", "LangChain", "Agent", "案例"],
-        "高级": ["实操", "Agent", "AutoGen"],
-    },
-}
-
-# 每日主题池（确保同一天3个任务围绕同一主题）
-DAILY_THEMES = {
-    "入门": [
-        "Prompt工程基础",
-        "认识大语言模型",
-        "AI 如何改变行业",
-        "API 调用入门",
-        "LangChain 初体验",
-    ],
-    "进阶": [
-        "RAG 技术实战",
-        "行业 AI 落地案例",
-        "LangChain 进阶",
-        "水利+AI 应用",
-        "多 Agent 协作入门",
-    ],
-    "高级": [
-        "Agent 工作流设计",
-        "复杂 RAG 系统搭建",
-        "行业解决方案实战",
-    ],
-}
+CURRICULUM_PATH = Path(__file__).resolve().parent.parent / "data" / "curriculum.json"
 
 
-def generate_daily_tasks():
+def _load_curriculum():
+    with open(CURRICULUM_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _get_or_create_resource(db, rsc: dict):
+    """Find existing resource by URL or create a new one."""
+    existing = db.query(Resource).filter(Resource.url == rsc["url"]).first()
+    if existing:
+        return existing
+    res = Resource(
+        title=rsc["title"],
+        url=rsc["url"],
+        tags=rsc.get("tags", ""),
+        type=rsc.get("type", "文章"),
+        difficulty=rsc.get("difficulty", "入门"),
+        source="system",
+    )
+    db.add(res)
+    db.flush()
+    return res
+
+
+def generate_daily_tasks(for_date: date | None = None):
+    target_date = for_date or date.target_date()
+    curriculum = _load_curriculum()
+    weeks = curriculum["weeks"]
     db = SessionLocal()
     try:
         users = db.query(User).all()
         for user in users:
-            today = date.today()
-            existing = (
-                db.query(LearningTask)
-                .filter(LearningTask.user_id == user.id, LearningTask.task_date == today)
-                .count()
-            )
-            if existing > 0:
+            # Delete old auto-generated tasks for target date (allow regeneration)
+            db.query(LearningTask).filter(
+                LearningTask.user_id == user.id,
+                LearningTask.task_date == target_date,
+                LearningTask.is_auto_generated == True,
+            ).delete()
+
+            # Set curriculum started date on first run
+            if user.curriculum_started_at is None:
+                user.curriculum_started_at = target_date
+
+            week_idx = (user.current_week or 1) - 1
+            if week_idx >= len(weeks):
+                week_idx = len(weeks) - 1
+            if week_idx < 0:
+                week_idx = 0
+
+            week_data = weeks[week_idx]
+            days = week_data.get("days", [])
+            if not days:
                 continue
 
-            level = user.current_level or "入门"
-            career = user.career_path or "AI+行业解决方案"
+            # Map weekday (Mon=0 ... Thu=3, Fri=4) to curriculum day index
+            day_idx = target_date.weekday() % len(days)
+            day_tasks = days[day_idx].get("tasks", [])
 
-            # 获取该用户已分配过的资源ID（去重）
-            assigned_ids = {
-                r[0]
-                for r in db.query(LearningTask.resource_id)
-                .filter(
-                    LearningTask.user_id == user.id,
-                    LearningTask.resource_id.isnot(None),
-                )
-                .all()
-            }
-
-            # 获取该职业路径、该阶段的优先标签
-            preferred_tags = PATH_TAGS.get(career, PATH_TAGS["通用学习"]).get(level, ["LLM", "API", "Prompt"])
-
-            # 随机选一个每日主题
-            themes = DAILY_THEMES.get(level, DAILY_THEMES["入门"])
-            daily_theme = random.choice(themes)
-
-            for task_type, resource_type in TYPE_MAP.items():
-                # 先找符合难度 + 优先标签的资源
-                candidates = (
-                    db.query(Resource)
-                    .filter(
-                        Resource.type == resource_type,
-                        Resource.difficulty == level,
-                    )
-                    .all()
-                )
-
-                # 按标签匹配度排序：匹配优先标签越多越好
-                def tag_score(r: Resource) -> int:
-                    if not r.tags:
-                        return 0
-                    rtags = set(t.strip() for t in r.tags.split(","))
-                    return len(rtags & set(preferred_tags))
-
-                candidates.sort(key=tag_score, reverse=True)
-
-                # 过滤已分配过的
-                fresh = [r for r in candidates if r.id not in assigned_ids]
-
-                # 如果没有未分配的资源，放宽难度和已分配限制
-                if not fresh:
-                    fresh = candidates
-
-                if not fresh:
-                    # 最后兜底：同类型任意资源
-                    fresh = (
-                        db.query(Resource)
-                        .filter(Resource.type == resource_type)
-                        .all()
-                    )
-
-                if not fresh:
-                    continue
-
-                res = random.choice(fresh[:5])  # 从匹配度最高的前5个中随机选
+            for t in day_tasks:
+                rsc_data = t.get("resource")
+                resource = None
+                if rsc_data:
+                    resource = _get_or_create_resource(db, rsc_data)
 
                 task = LearningTask(
                     user_id=user.id,
-                    title=res.title,
-                    description=f"【{daily_theme}】今日{task_type}任务：{res.title}",
-                    type=task_type,
-                    resource_id=res.id,
-                    estimated_minutes=30 if resource_type == "文章" else (45 if resource_type == "视频" else 60),
-                    task_date=today,
+                    title=t["title"],
+                    description=f"【{week_data['theme']}】{t['type']}任务",
+                    type=t["type"],
+                    resource_id=resource.id if resource else None,
+                    estimated_minutes=t.get("estimated_minutes", 30),
+                    task_date=target_date,
                     is_auto_generated=True,
                 )
                 db.add(task)
-                assigned_ids.add(res.id)
 
             db.commit()
     finally:
