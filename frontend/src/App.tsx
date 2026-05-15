@@ -5,10 +5,11 @@ import Resources from './pages/Resources';
 import Stats from './pages/Stats';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
+import Learn from './pages/Learn';
 
 const navItems = [
   { path: '/', label: '仪表盘', icon: '📊' },
-  { path: '/tasks', label: '任务', icon: '📝' },
+  { path: '/learn', label: '学习', icon: '📚' },
   { path: '/resources', label: '资源', icon: '📚' },
   { path: '/stats', label: '统计', icon: '📈' },
   { path: '/settings', label: '设置', icon: '⚙️' },
@@ -63,6 +64,7 @@ export default function App() {
                     <Route path="/resources" element={<Resources />} />
                     <Route path="/stats" element={<Stats />} />
                     <Route path="/settings" element={<Settings />} />
+                    <Route path="/learn" element={<Learn />} />
                   </Routes>
                 </main>
 
