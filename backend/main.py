@@ -8,6 +8,7 @@ from services.scheduler import start_scheduler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
     start_scheduler()
     yield
 
@@ -21,8 +22,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-Base.metadata.create_all(bind=engine)
 
 app.include_router(user.router, prefix="/api/user", tags=["用户"])
 app.include_router(tasks.router, prefix="/api/tasks", tags=["任务"])

@@ -31,7 +31,7 @@ def _get_or_create_resource(db, rsc: dict):
 
 
 def generate_daily_tasks(for_date: date | None = None):
-    target_date = for_date or date.target_date()
+    target_date = for_date or date.today()
     curriculum = _load_curriculum()
     weeks = curriculum["weeks"]
     db = SessionLocal()
