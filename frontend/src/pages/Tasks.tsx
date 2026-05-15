@@ -16,6 +16,7 @@ interface Task {
   actual_minutes: number;
   notes: string;
   is_auto_generated: boolean;
+  module_id: number | null;
 }
 
 const TYPE_ICONS: Record<string, string> = { '阅读': '📖', '实操': '💻', '视频': '🎬' };
