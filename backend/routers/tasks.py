@@ -134,17 +134,19 @@ def complete_task(
         CheckIn.check_date == yesterday
     ).first()
 
+    db.flush()  # Ensure checkin.id is populated
+
     today_other_checkins = db.query(CheckIn).filter(
         CheckIn.user_id == user.id,
         CheckIn.check_date == today,
         CheckIn.id != checkin.id
     ).first()
 
-    if yesterday_checkin:
-        user.streak_days += 1
-    elif not today_other_checkins:
-        # 非连续但今天刚启动
-        user.streak_days = 1
+    if not today_other_checkins:
+        if yesterday_checkin:
+            user.streak_days += 1
+        else:
+            user.streak_days = 1
     # 如果今天已经打卡过其他任务，streak 不变
 
     today_tasks = (
