@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Task {
   id: number;
@@ -13,6 +14,7 @@ interface Task {
   actual_minutes: number;
   notes: string;
   is_auto_generated: boolean;
+  module_id: number | null;
 }
 
 interface Props {
@@ -21,20 +23,40 @@ interface Props {
   onComplete: (id: number, notes: string) => void;
   onDelete: (id: number) => void;
   onReset: (id: number) => void;
+  moduleContent?: string;
+  moduleWeek?: number;
+  moduleDay?: number;
 }
 
-export default function TaskCard({ task, icon, onComplete, onDelete, onReset }: Props) {
+const TYPE_ICONS: Record<string, string> = {
+  '概念认知': '📖',
+  '简单体验': '🎮',
+  '工具实操': '🛠️',
+  '知识点': '📝',
+  '项目实战': '🚀',
+  '自主探索': '🔍',
+};
+
+export default function TaskCard({ task, icon, onComplete, onDelete, onReset, moduleContent, moduleWeek, moduleDay }: Props) {
   const [studying, setStudying] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
   const [notes, setNotes] = useState('');
+  const navigate = useNavigate();
 
   const completed = task.status === 'completed';
+  const displayIcon = TYPE_ICONS[task.type] || icon;
+  const hasModule = !!task.module_id;
+  const hasExternalLink = !!task.resource_url && !hasModule;
 
   const handleStartLearning = () => {
-    if (task.resource_url) {
+    if (hasModule) {
+      setStudying(true);
+    } else if (task.resource_url) {
       window.open(task.resource_url, '_blank');
+      setStudying(true);
+    } else {
+      setStudying(true);
     }
-    setStudying(true);
   };
 
   const handleFinish = () => {
@@ -52,7 +74,7 @@ export default function TaskCard({ task, icon, onComplete, onDelete, onReset }: 
       <div className={`bg-white rounded-xl p-4 shadow-sm border-l-4 ${completed ? 'border-green-400' : studying ? 'border-amber-400' : 'border-indigo-400'}`}>
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-3 flex-1">
-            <span className="text-2xl mt-0.5">{icon}</span>
+            <span className="text-2xl mt-0.5">{displayIcon}</span>
             <div className="flex-1">
               <h4 className={`font-semibold ${completed ? 'line-through text-gray-400' : ''}`}>{task.title}</h4>
               <p className="text-xs text-gray-500 mt-1">
@@ -61,22 +83,22 @@ export default function TaskCard({ task, icon, onComplete, onDelete, onReset }: 
               </p>
               {studying && (
                 <p className="text-sm text-amber-600 mt-1 font-medium">
-                  ⏳ 学习中... 目标 {task.estimated_minutes} 分钟
+                  学习中... 目标 {task.estimated_minutes} 分钟
                 </p>
               )}
               {completed && task.notes && (
-                <p className="text-sm text-gray-400 mt-1 italic">" {task.notes}"</p>
+                <p className="text-sm text-gray-400 mt-1 italic">"{task.notes}"</p>
               )}
             </div>
           </div>
 
           <div className="flex gap-2 ml-3">
-            {!completed && !studying && task.resource_url && (
+            {!completed && !studying && (
               <button
                 onClick={handleStartLearning}
                 className="bg-indigo-500 text-white px-3 py-1 rounded-lg text-xs font-medium hover:bg-indigo-600"
               >
-                🔗 开始学习
+                {hasModule ? '📚 开始学习' : '🔗 开始学习'}
               </button>
             )}
             {studying && (
@@ -100,9 +122,44 @@ export default function TaskCard({ task, icon, onComplete, onDelete, onReset }: 
             </button>
           </div>
         </div>
+
+        {/* Module content expanded inline */}
+        {studying && hasModule && moduleContent && (
+          <div className="mt-4 pt-4 border-t">
+            <div className="prose prose-sm max-w-none text-sm" dangerouslySetInnerHTML={{
+              __html: moduleContent
+                .replace(/^### (.+)$/gm, '<h3 class="text-lg font-bold mt-6 mb-2">$1</h3>')
+                .replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold mt-8 mb-3">$1</h2>')
+                .replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold mt-8 mb-4">$1</h1>')
+                .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm text-pink-600">$1</code>')
+                .replace(/\n\n/g, "</p><p class='my-3 leading-relaxed'>")
+            }} />
+            <button
+              onClick={() => navigate(`/learn/${moduleWeek}/${moduleDay}`)}
+              className="mt-3 text-sm text-blue-500 hover:text-blue-700"
+            >
+              在新页面打开 →
+            </button>
+          </div>
+        )}
+
+        {/* External link note */}
+        {studying && hasExternalLink && (
+          <p className="text-sm text-gray-400 mt-3">
+            已在浏览器中打开学习材料，完成后请回到这里标记完成
+          </p>
+        )}
+
+        {/* No content available */}
+        {studying && !hasModule && !hasExternalLink && (
+          <p className="text-sm text-gray-400 mt-3">
+            该任务没有关联学习材料，可以在完成操作后记录心得
+          </p>
+        )}
       </div>
 
-      {/* 心得弹窗 */}
+      {/* Notes modal */}
       {showNotes && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setShowNotes(false)}>
           <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
