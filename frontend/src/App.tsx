@@ -6,6 +6,7 @@ import Stats from './pages/Stats';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
 import Learn from './pages/Learn';
+import ModuleView from './pages/ModuleView';
 
 const navItems = [
   { path: '/', label: '仪表盘', icon: '📊' },
@@ -65,6 +66,7 @@ export default function App() {
                     <Route path="/stats" element={<Stats />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/learn" element={<Learn />} />
+                    <Route path="/learn/:week/:day" element={<ModuleView />} />
                   </Routes>
                 </main>
 
