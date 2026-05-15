@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "AI学习追踪器",
+    "summary": "你正在用的这个平台！React + FastAPI + SQLite 全栈项目，从零到一完整实战",
+    "difficulty": "入门",
+    "tags": ["全栈", "React", "Python", "FastAPI"],
+    "steps": [
+      {
+        "order": 1,
+        "title": "下载项目代码",
+        "content": "从 Gitee 或平台直接下载项目压缩包。\n\n**方式一（推荐）：** 点击下方按钮下载平台打包的完整代码包。\n**方式二：** `git clone https://gitee.com/xxx/ai-learning-tracker.git`（需安装 Git）"
+      },
+      {
+        "order": 2,
+        "title": "安装 Python 依赖",
+        "content": "确保已安装 Python 3.10+，然后执行：\n\n```bash\ncd ai-learning-tracker/backend\npip install -r requirements.txt\n```\n\n如果报 `pip` 找不到，先安装 Python 并确保勾选了 "Add to PATH"。"
+      },
+      {
+        "order": 3,
+        "title": "启动后端",
+        "content": "```bash\ncd backend\nuvicorn main:app --reload --port 8000\n```\n\n看到 `Uvicorn running on http://127.0.0.1:8000` 就成功了。打开浏览器访问 `http://127.0.0.1:8000/api/health` 验证。"
+      },
+      {
+        "order": 4,
+        "title": "启动前端",
+        "content": "新开一个终端窗口：\n\n```bash\ncd frontend\nnpm install\nnpm run dev\n```\n\n看到 `Local: http://localhost:5173/` 就成功了。在浏览器中打开即可使用。"
+      }
+    ],
+    "source_links": [
+      {"label": "Gitee 仓库", "url": "https://gitee.com/"}
+    ]
+  }
+]

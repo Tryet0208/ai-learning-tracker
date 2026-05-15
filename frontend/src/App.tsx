@@ -7,11 +7,12 @@ import Settings from './pages/Settings';
 import Login from './pages/Login';
 import Learn from './pages/Learn';
 import ModuleView from './pages/ModuleView';
+import Workshop from './pages/Workshop';
 
 const navItems = [
   { path: '/', label: '仪表盘', icon: '📊' },
   { path: '/learn', label: '学习', icon: '📚' },
-  { path: '/resources', label: '资源', icon: '📚' },
+  { path: '/workshop', label: '工坊', icon: '🔨' },
   { path: '/stats', label: '统计', icon: '📈' },
   { path: '/settings', label: '设置', icon: '⚙️' },
 ];
@@ -67,6 +68,7 @@ export default function App() {
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/learn" element={<Learn />} />
                     <Route path="/learn/:week/:day" element={<ModuleView />} />
+                    <Route path="/workshop" element={<Workshop />} />
                   </Routes>
                 </main>
 

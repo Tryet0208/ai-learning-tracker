@@ -2,7 +2,7 @@ import json
 from datetime import date
 from pathlib import Path
 from database import SessionLocal
-from models import User, LearningTask, Resource
+from models import User, LearningTask, Resource, Module
 
 CURRICULUM_PATH = Path(__file__).resolve().parent.parent / "data" / "curriculum.json"
 
@@ -64,6 +64,12 @@ def generate_daily_tasks(for_date: date | None = None):
             day_idx = target_date.weekday() % len(days)
             day_tasks = days[day_idx].get("tasks", [])
 
+            # Look up the Module for this week/day
+            module = db.query(Module).filter(
+                Module.week == week_idx + 1,
+                Module.day == day_idx + 1
+            ).first()
+
             for t in day_tasks:
                 rsc_data = t.get("resource")
                 resource = None
@@ -76,6 +82,7 @@ def generate_daily_tasks(for_date: date | None = None):
                     description=f"【{week_data['theme']}】{t['type']}任务",
                     type=t["type"],
                     resource_id=resource.id if resource else None,
+                    module_id=module.id if module else None,
                     estimated_minutes=t.get("estimated_minutes", 30),
                     task_date=target_date,
                     is_auto_generated=True,
