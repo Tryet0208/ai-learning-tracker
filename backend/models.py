@@ -38,6 +38,7 @@ class LearningTask(Base):
     description: Mapped[str] = mapped_column(Text, default="")
     type: Mapped[str] = mapped_column(String(20), default="阅读")
     resource_id: Mapped[int | None] = mapped_column(ForeignKey("resource.id"), nullable=True)
+    module_id: Mapped[int | None] = mapped_column(ForeignKey("module.id"), nullable=True)
     estimated_minutes: Mapped[int] = mapped_column(Integer, default=30)
     task_date: Mapped[date] = mapped_column(Date, default=date.today)
     status: Mapped[str] = mapped_column(String(10), default="pending")
@@ -76,3 +77,19 @@ class CheckIn(Base):
 
     user: Mapped["User"] = relationship(back_populates="check_ins")
     task: Mapped["LearningTask"] = relationship(back_populates="check_ins")
+
+
+class Module(Base):
+    __tablename__ = "module"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    week: Mapped[int] = mapped_column(Integer, nullable=False)
+    day: Mapped[int] = mapped_column(Integer, nullable=False)
+    title: Mapped[str] = mapped_column(String(200), default="")
+    theme: Mapped[str] = mapped_column(String(200), default="")
+    goal: Mapped[str] = mapped_column(Text, default="")
+    content: Mapped[str] = mapped_column(Text, default="")
+    status: Mapped[str] = mapped_column(String(20), default="draft")
+    external_links: Mapped[str] = mapped_column(Text, default="[]")
+    created_at: Mapped[datetime] = mapped_column(default=datetime.now)
+    updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now)
