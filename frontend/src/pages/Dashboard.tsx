@@ -71,7 +71,17 @@ export default function Dashboard() {
   const handleDelete = (id: number) => api.delete(`/tasks/${id}`).then(() => fetchTasks());
   const handleReset = (id: number) => api.patch(`/tasks/${id}/reset`).then(() => fetchTasks());
 
-  if (!stats || !profile || loading) return <div className="text-center py-24 text-base text-gray-500 dark:text-gray-400">加载中</div>;
+  if (loading) return <div className="text-center py-24 text-base text-gray-500 dark:text-gray-400">加载中</div>;
+  if (!stats || !profile) {
+    return (
+      <div className="space-y-14">
+        <div className="text-center py-16">
+          <div className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">进步永无止境</div>
+          <p className="text-base text-gray-500 dark:text-gray-400">离线模式下无法加载个人数据，请浏览课程内容</p>
+        </div>
+      </div>
+    );
+  }
 
   const today = stats.daily_data.find((d) => d.date === new Date().toISOString().slice(0, 10));
   const maxMinutes = Math.max(...stats.daily_data.map((d) => d.minutes), 1);

@@ -103,7 +103,7 @@ export default function Settings() {
     }
   };
 
-  if (!profile) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">加载中</div>;
+  if (!profile) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">离线模式，设置暂不可用</div>;
 
   return (
     <div className="space-y-12 pb-24">

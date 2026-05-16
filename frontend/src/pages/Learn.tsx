@@ -74,6 +74,12 @@ export default function Learn() {
         })}
       </div>
 
+      {grouped.length === 0 && (
+        <div className="py-20 text-center">
+          <p className="text-base text-gray-500 dark:text-gray-400 mb-2">课程内容需要后端支持</p>
+          <p className="text-sm text-gray-400 dark:text-gray-500">请确保后端服务正在运行</p>
+        </div>
+      )}
       <div className="space-y-1">
         {grouped.map(([weekStr, weekModules]) => {
           const week = Number(weekStr);

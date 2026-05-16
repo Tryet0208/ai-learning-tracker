@@ -94,6 +94,17 @@ export default function Login() {
             {loading ? '登录中...' : '登录'}
           </button>
 
+          <div className="flex items-center gap-4 my-5">
+            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+            <span className="text-sm text-gray-400 dark:text-gray-500">或</span>
+            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+          </div>
+
+          <button onClick={() => { localStorage.setItem('auth_token', 'guest_token'); navigate('/'); }}
+                  className="w-full border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 py-4 rounded text-lg font-bold hover:border-gray-900 dark:hover:border-gray-100 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+            游客体验
+          </button>
+
           <button onClick={toggle}
                   className="mt-8 mx-auto block text-sm text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-300 transition-colors">
             {dark ? '切换到浅色模式' : '切换到深色模式'}

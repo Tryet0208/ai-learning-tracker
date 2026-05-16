@@ -14,7 +14,7 @@ export default function Stats() {
     api.get('/stats/calendar', { params: { month } }).then((res) => setCalendar(res.data.checkin_dates));
   }, [month]);
 
-  if (!stats) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">加载中</div>;
+  if (!stats) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">统计需要后端支持，离线模式暂不可用</div>;
 
   return (
     <div className="space-y-14 pb-24">
