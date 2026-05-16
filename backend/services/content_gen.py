@@ -87,7 +87,7 @@ def build_content_prompt(module: Module) -> str:
     return prompt
 
 
-def generate_module_content(week: int, day: int, ai_api_key: str, ai_base_url: str = "https://api.openai.com/v1") -> str:
+def generate_module_content(week: int, day: int, ai_api_key: str, ai_base_url: str = "https://api.openai.com/v1", model: str = "deepseek-chat") -> str:
     """调用 AI API 生成单个模块内容"""
     db = SessionLocal()
     try:
@@ -104,13 +104,13 @@ def generate_module_content(week: int, day: int, ai_api_key: str, ai_base_url: s
         db.close()
 
 
-def _call_ai_api(prompt: str, api_key: str, base_url: str) -> str:
+def _call_ai_api(prompt: str, api_key: str, base_url: str, model: str = "deepseek-chat") -> str:
     import requests
     resp = requests.post(
         f"{base_url}/chat/completions",
         headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
         json={
-            "model": "gpt-4o-mini",
+            "model": model,
             "messages": [
                 {"role": "system", "content": "你是一个专业的 AI 教育内容作者。"},
                 {"role": "user", "content": prompt},

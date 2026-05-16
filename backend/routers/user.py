@@ -22,6 +22,7 @@ class UserUpdate(BaseModel):
     current_level: str | None = None
     career_path: str | None = None
     current_week: int | None = None
+    interests: str | None = None
 
 
 @router.get("/profile")
@@ -40,6 +41,9 @@ def get_profile(user: User = Depends(get_current_user)):
         "level_progress": user.level_progress,
         "current_week": user.current_week,
         "curriculum_started_at": str(user.curriculum_started_at) if user.curriculum_started_at else None,
+        "interests": user.interests,
+        "email": user.email,
+        "email_verified": user.email_verified,
     }
 
 

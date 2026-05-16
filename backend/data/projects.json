@@ -14,7 +14,7 @@
       {
         "order": 2,
         "title": "安装 Python 依赖",
-        "content": "确保已安装 Python 3.10+，然后执行：\n\n```bash\ncd ai-learning-tracker/backend\npip install -r requirements.txt\n```\n\n如果报 `pip` 找不到，先安装 Python 并确保勾选了 "Add to PATH"。"
+        "content": "确保已安装 Python 3.10+，然后执行：\n\n```bash\ncd ai-learning-tracker/backend\npip install -r requirements.txt\n```\n\n如果报 `pip` 找不到，先安装 Python 并确保勾选了 &quot;Add to PATH&quot;。"
       },
       {
         "order": 3,

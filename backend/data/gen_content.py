@@ -18,7 +18,8 @@ from models import Module
 from services.content_gen import init_modules_from_curriculum, generate_module_content
 
 API_KEY = os.getenv("OPENAI_API_KEY", "")
-API_BASE = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+API_BASE = os.getenv("OPENAI_BASE_URL", "https://api.deepseek.com/v1")
+API_MODEL = os.getenv("OPENAI_MODEL", "deepseek-chat")
 
 
 def main():
@@ -37,7 +38,7 @@ def main():
 
     if args.week and args.day:
         print(f"生成模块 Week {args.week} Day {args.day}...")
-        content = generate_module_content(args.week, args.day, API_KEY, API_BASE)
+        content = generate_module_content(args.week, args.day, API_KEY, API_BASE, model=API_MODEL)
         print(f"  生成完成，{len(content)} 字符")
     elif args.all:
         modules = db.query(Module).order_by(Module.week, Module.day).all()
@@ -47,7 +48,7 @@ def main():
                 continue
             print(f"生成模块 Week {m.week} Day {m.day}: {m.title}...")
             try:
-                content = generate_module_content(m.week, m.day, API_KEY, API_BASE)
+                content = generate_module_content(m.week, m.day, API_KEY, API_BASE, model=API_MODEL)
                 print(f"  完成，{len(content)} 字符")
             except Exception as e:
                 print(f"  失败: {e}")

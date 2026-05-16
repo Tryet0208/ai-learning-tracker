@@ -1,63 +1,104 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
+import { useTheme } from '../ThemeContext';
+
+const VIDEOS = ['/bg.mp4', '/bg2.mp4', '/bg3.mp4'];
 
 export default function Login() {
-  const [code, setCode] = useState('');
+  const [email, setEmail] = useState('');
+  const [verifyCode, setVerifyCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [countdown, setCountdown] = useState(0);
   const navigate = useNavigate();
+  const { dark, toggle } = useTheme();
+  const timerRef = useRef<number | null>(null);
+  const [index, setIndex] = useState(0);
+  const [show, setShow] = useState(true);
+  const vidRef = useRef<HTMLVideoElement>(null);
 
-  const handleLogin = async () => {
-    const trimmed = code.trim();
-    if (!trimmed) {
-      setError('请输入访问码');
-      return;
+  // When video ends → fade out → change src (triggers onLoadedData → fade in)
+  useEffect(() => {
+    if (!show) {
+      const t = setTimeout(() => setIndex((i) => (i + 1) % VIDEOS.length), 700);
+      return () => clearTimeout(t);
     }
-    setLoading(true);
-    setError('');
+  }, [show]);
+
+  const startCountdown = useCallback(() => {
+    setCountdown(60);
+    timerRef.current = window.setInterval(() => {
+      setCountdown((n) => { if (n <= 1) { if (timerRef.current) clearInterval(timerRef.current); return 0; } return n - 1; });
+    }, 1000);
+  }, []);
+
+  const sendCode = async () => {
+    const trimmed = email.trim().toLowerCase();
+    if (!trimmed || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmed)) {
+      setError('请输入有效的邮箱地址'); return;
+    }
+    setError(''); setSending(true);
     try {
-      const res = await api.post('/auth/login', { access_code: trimmed });
-      if (res.data.error) {
-        setError(res.data.error);
-      } else {
-        localStorage.setItem('auth_token', res.data.token);
-        navigate('/');
-      }
-    } catch {
-      setError('登录失败，请重试');
-    }
+      const res = await api.post('/auth/send-code', { email: trimmed });
+      if (res.data.error) { setError(res.data.error); }
+      else { startCountdown(); }
+    } catch { setError('发送失败，请重试'); }
+    setSending(false);
+  };
+
+  const loginWithEmail = async () => {
+    const trimmed = email.trim().toLowerCase();
+    if (!trimmed || !verifyCode.trim()) { setError('请输入邮箱和验证码'); return; }
+    setLoading(true); setError('');
+    try {
+      const res = await api.post('/auth/login-with-code', { email: trimmed, code: verifyCode.trim() });
+      if (res.data.error) { setError(res.data.error); }
+      else { localStorage.setItem('auth_token', res.data.token); navigate('/'); }
+    } catch { setError('登录失败，请重试'); }
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-white flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-center text-indigo-600 mb-2">AI 学习追踪器</h1>
-        <p className="text-sm text-gray-400 text-center mb-6">输入访问码开始学习</p>
+    <div className="min-h-screen bg-white dark:bg-neutral-950 flex relative overflow-hidden transition-colors duration-300">
+      <video ref={vidRef} autoPlay muted playsInline src={VIDEOS[index]}
+             onEnded={() => setShow(false)}
+             onLoadedData={() => { vidRef.current?.play(); setShow(true); }}
+             className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none transition-opacity duration-700 ${show ? 'opacity-100' : 'opacity-0'}`} />
 
-        <input
-          type="password"
-          value={code}
-          onChange={(e) => { setCode(e.target.value); setError(''); }}
-          onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
-          placeholder="请输入访问码"
-          autoFocus
-          className="w-full border rounded-xl px-4 py-3 text-sm mb-3 text-center tracking-widest"
-        />
-        {error && <p className="text-red-400 text-xs text-center mb-3">{error}</p>}
+      <div className="relative z-10 flex items-center justify-center flex-1 px-6">
+        <div className="w-full max-w-sm">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2 tracking-widest">进步永无止境</h1>
+          <p className="text-base text-gray-500 dark:text-gray-400 mb-10">登录开始学习</p>
 
-        <button
-          onClick={handleLogin}
-          disabled={loading}
-          className="w-full bg-indigo-500 text-white py-3 rounded-xl text-sm font-medium hover:bg-indigo-600 disabled:opacity-50"
-        >
-          {loading ? '登录中...' : '进入学习'}
-        </button>
+          <div className="flex gap-3 mb-4">
+            <input type="email" value={email}
+                   onChange={(e) => { setEmail(e.target.value); setError(''); }}
+                   onKeyDown={(e) => e.key === 'Enter' && (verifyCode ? loginWithEmail() : sendCode())}
+                   placeholder="输入邮箱地址" autoFocus
+                   className="flex-1 border-2 border-gray-200 dark:border-gray-700 rounded px-4 py-3 text-base bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 transition-colors" />
+            <button onClick={sendCode} disabled={sending || countdown > 0}
+                    className="text-sm text-gray-900 dark:text-gray-100 border-2 border-gray-300 dark:border-gray-600 px-4 py-3 rounded hover:bg-gray-50 dark:hover:bg-neutral-900 disabled:opacity-30 transition-colors font-bold whitespace-nowrap">
+              {countdown > 0 ? `${countdown}s` : sending ? '发送中' : '获取验证码'}
+            </button>
+          </div>
+          <input type="text" value={verifyCode}
+                 onChange={(e) => { setVerifyCode(e.target.value); setError(''); }}
+                 onKeyDown={(e) => e.key === 'Enter' && loginWithEmail()}
+                 placeholder="输入6位验证码"
+                 className="w-full border-2 border-gray-200 dark:border-gray-700 rounded px-4 py-3 text-lg mb-5 bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 transition-colors tracking-widest text-center" />
+          {error && <p className="text-sm text-red-400 mb-5">{error}</p>}
+          <button onClick={loginWithEmail} disabled={loading}
+                  className="w-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 py-4 rounded text-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-40 transition-colors">
+            {loading ? '登录中...' : '登录'}
+          </button>
 
-        <p className="text-xs text-gray-400 text-center mt-4">
-          首次输入访问码将自动创建新账号
-        </p>
+          <button onClick={toggle}
+                  className="mt-8 mx-auto block text-sm text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-300 transition-colors">
+            {dark ? '切换到浅色模式' : '切换到深色模式'}
+          </button>
+        </div>
       </div>
     </div>
   );

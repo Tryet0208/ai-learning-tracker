@@ -28,7 +28,7 @@ export default function CalendarView({ checkinDates, month }: Props) {
     <div>
       <div className="grid grid-cols-7 gap-1 mb-1">
         {['一', '二', '三', '四', '五', '六', '日'].map((d) => (
-          <div key={d} className="text-center text-xs text-gray-400 py-1">{d}</div>
+          <div key={d} className="text-center text-xs text-gray-500 dark:text-gray-500 py-1">{d}</div>
         ))}
       </div>
       {weeks.map((w, wi) => (
@@ -40,7 +40,7 @@ export default function CalendarView({ checkinDates, month }: Props) {
                   className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs ${
                     checkinSet.has(`${year}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`)
                       ? 'bg-green-500 text-white font-medium'
-                      : 'bg-gray-100 text-gray-500'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
                   }`}
                 >
                   {d}

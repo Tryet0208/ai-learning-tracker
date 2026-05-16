@@ -92,19 +92,19 @@
           "tasks": [
             {
               "type": "阅读",
-              "title": "AI在水利/工程领域的应用案例",
+              "title": "AI在多个行业的应用案例",
               "estimated_minutes": 30,
               "resource": {
-                "title": "人工智能在水利行业的应用综述（知乎）",
-                "url": "https://www.zhihu.com/search?type=content&q=人工智能在水利行业的应用综述",
-                "tags": "案例,行业,水利,入门",
+                "title": "人工智能在各行业的应用综述（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=人工智能在各行业的应用综述",
+                "tags": "案例,行业,入门",
                 "difficulty": "入门",
                 "type": "文章"
               }
             },
             {
               "type": "实操",
-              "title": "用AI总结一篇水利工程论文摘要",
+              "title": "用AI总结一篇技术论文摘要",
               "estimated_minutes": 30,
               "resource": {
                 "title": "Kimi Chat 长文阅读助手",
@@ -193,12 +193,12 @@
             },
             {
               "type": "实操",
-              "title": "设计一个「水利工程助手」Prompt",
+              "title": "设计一个「AI编程助手」Prompt",
               "estimated_minutes": 30,
               "resource": {
                 "title": "文心一言",
                 "url": "https://yiyan.baidu.com/",
-                "tags": "Prompt,实操,水利,入门",
+                "tags": "Prompt,实操,入门",
                 "difficulty": "入门",
                 "type": "案例"
               }
@@ -234,12 +234,12 @@
             },
             {
               "type": "实操",
-              "title": "用Few-shot Prompt让AI完成工程数据处理",
+              "title": "用Few-shot Prompt让AI完成文本处理任务",
               "estimated_minutes": 35,
               "resource": {
                 "title": "通义千问",
                 "url": "https://tongyi.aliyun.com/",
-                "tags": "Prompt,实操,水利,入门",
+                "tags": "Prompt,实操,入门",
                 "difficulty": "入门",
                 "type": "案例"
               }
@@ -754,12 +754,12 @@
             },
             {
               "type": "实操",
-              "title": "将水利工程文档做成可问答的知识库",
+              "title": "将技术文档做成可问答的知识库",
               "estimated_minutes": 60,
               "resource": {
                 "title": "LangChain RAG教程",
                 "url": "https://python.langchain.com/docs/get_started/introduction",
-                "tags": "RAG,实操,水利,进阶",
+                "tags": "RAG,实操,进阶",
                 "difficulty": "进阶",
                 "type": "案例"
               }
@@ -783,43 +783,43 @@
     {
       "week": 7,
       "theme": "AI+行业案例深度研究",
-      "goal": "深入研究AI在水利/工程领域的真实落地案例",
+      "goal": "深入研究AI在各行业的真实落地案例",
       "days": [
         {
           "day": 1,
           "tasks": [
             {
               "type": "阅读",
-              "title": "智慧水利：AI在水资源管理中的应用",
+              "title": "AI在各行业中的应用案例研究",
               "estimated_minutes": 35,
               "resource": {
-                "title": "智慧水利发展现状（知乎）",
-                "url": "https://www.zhihu.com/search?type=content&q=智慧水利发展现状",
-                "tags": "案例,行业,水利,进阶",
+                "title": "AI行业应用现状（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=AI行业应用现状",
+                "tags": "案例,行业,进阶",
                 "difficulty": "进阶",
                 "type": "文章"
               }
             },
             {
               "type": "实操",
-              "title": "用AI分析一篇水利论文的研究方法",
+              "title": "用AI分析一篇学术论文的研究方法",
               "estimated_minutes": 40,
               "resource": {
                 "title": "Kimi Chat",
                 "url": "https://kimi.moonshot.cn/",
-                "tags": "实操,水利,进阶",
+                "tags": "实操,进阶",
                 "difficulty": "进阶",
                 "type": "案例"
               }
             },
             {
               "type": "视频",
-              "title": "观看：智慧水利方案解读",
+              "title": "观看：AI行业应用方案解读",
               "estimated_minutes": 30,
               "resource": {
-                "title": "智慧水利解决方案（B站）",
-                "url": "https://search.bilibili.com/all?keyword=智慧水利解决方案",
-                "tags": "案例,水利,视频,进阶",
+                "title": "AI行业解决方案（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI行业解决方案",
+                "tags": "案例,视频,进阶",
                 "difficulty": "进阶",
                 "type": "视频"
               }
@@ -831,24 +831,24 @@
           "tasks": [
             {
               "type": "阅读",
-              "title": "数字孪生流域：技术架构与实践",
+              "title": "AI在物联网中的应用与实践",
               "estimated_minutes": 35,
               "resource": {
-                "title": "数字孪生水利技术（CSDN）",
-                "url": "https://so.csdn.net/so/search?q=数字孪生水利技术",
-                "tags": "案例,行业,水利,进阶",
+                "title": "AI+IoT技术实践（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=AI+IoT技术实践",
+                "tags": "案例,行业,进阶",
                 "difficulty": "进阶",
                 "type": "文章"
               }
             },
             {
               "type": "实操",
-              "title": "设计一个水利数据AI分析方案",
+              "title": "设计一个数据分析AI方案",
               "estimated_minutes": 45,
               "resource": {
                 "title": "通义千问",
                 "url": "https://tongyi.aliyun.com/",
-                "tags": "实操,水利,进阶",
+                "tags": "实操,进阶",
                 "difficulty": "进阶",
                 "type": "案例"
               }
@@ -872,36 +872,36 @@
           "tasks": [
             {
               "type": "阅读",
-              "title": "AI在灾害预警中的应用",
+              "title": "AI在智能客服中的应用",
               "estimated_minutes": 30,
               "resource": {
-                "title": "AI洪水预警系统（掘金）",
-                "url": "https://juejin.cn/search?query=AI洪水预警系统",
-                "tags": "案例,行业,水利,进阶",
+                "title": "AI智能客服系统（掘金）",
+                "url": "https://juejin.cn/search?query=AI智能客服系统",
+                "tags": "案例,行业,进阶",
                 "difficulty": "进阶",
                 "type": "文章"
               }
             },
             {
               "type": "实操",
-              "title": "用Python+AI进行水文数据预处理",
+              "title": "用Python+AI进行文本数据预处理",
               "estimated_minutes": 50,
               "resource": {
                 "title": "通义千问API",
                 "url": "https://tongyi.aliyun.com/",
-                "tags": "实操,水利,Python,进阶",
+                "tags": "实操,Python,进阶",
                 "difficulty": "进阶",
                 "type": "案例"
               }
             },
             {
               "type": "视频",
-              "title": "观看：AI+水利实战案例",
+              "title": "观看：AI+行业实战案例",
               "estimated_minutes": 35,
               "resource": {
-                "title": "AI赋能水利行业（B站）",
-                "url": "https://search.bilibili.com/all?keyword=AI赋能水利行业",
-                "tags": "案例,水利,视频,进阶",
+                "title": "AI赋能各行业（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI赋能各行业",
+                "tags": "案例,视频,进阶",
                 "difficulty": "进阶",
                 "type": "视频"
               }
@@ -973,12 +973,12 @@
             },
             {
               "type": "实操",
-              "title": "将水利工程规范文档向量化并存储",
+              "title": "将技术规范文档向量化并存储",
               "estimated_minutes": 60,
               "resource": {
                 "title": "LangChain中文文档",
                 "url": "https://python.langchain.com/docs/get_started/introduction",
-                "tags": "RAG,实操,水利,进阶",
+                "tags": "RAG,实操,进阶",
                 "difficulty": "进阶",
                 "type": "案例"
               }
@@ -1014,7 +1014,7 @@
             },
             {
               "type": "实操",
-              "title": "测试并优化你的水利知识库问答效果",
+              "title": "测试并优化你的知识库问答效果",
               "estimated_minutes": 50,
               "resource": {
                 "title": "LangSmith（可观测性平台）",
@@ -1144,12 +1144,12 @@
             },
             {
               "type": "实操",
-              "title": "设计一个水利工程Agent方案",
+              "title": "设计一个智能客服Agent方案",
               "estimated_minutes": 50,
               "resource": {
                 "title": "通义千问",
                 "url": "https://tongyi.aliyun.com/",
-                "tags": "Agent,实操,水利,高级",
+                "tags": "Agent,实操,高级",
                 "difficulty": "高级",
                 "type": "案例"
               }
@@ -1172,44 +1172,44 @@
     },
     {
       "week": 10,
-      "theme": "水利+AI 项目实战（上）",
-      "goal": "将AI技术应用到水利工程实际场景，完成项目前半部分",
+      "theme": "综合项目实战（上）",
+      "goal": "将AI技术应用到实际场景中，完成项目前半部分",
       "days": [
         {
           "day": 1,
           "tasks": [
             {
               "type": "阅读",
-              "title": "水利数据的特点与AI适配方法",
+              "title": "结构化数据的特点与AI适配方法",
               "estimated_minutes": 35,
               "resource": {
-                "title": "水利数据AI处理方法（CSDN）",
-                "url": "https://so.csdn.net/so/search?q=水利数据AI处理方法",
-                "tags": "水利,实操,高级",
+                "title": "数据AI处理方法（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=数据AI处理方法",
+                "tags": "实操,高级",
                 "difficulty": "高级",
                 "type": "文章"
               }
             },
             {
               "type": "实操",
-              "title": "收集并整理一份水利工程数据集",
+              "title": "收集并整理一份公开数据集",
               "estimated_minutes": 60,
               "resource": {
                 "title": "和鲸社区（数据科学平台）",
                 "url": "https://www.heywhale.com/",
-                "tags": "水利,实操,数据,高级",
+                "tags": "实操,数据,高级",
                 "difficulty": "高级",
                 "type": "案例"
               }
             },
             {
               "type": "视频",
-              "title": "观看：水利数据+AI分析实战",
+              "title": "观看：数据+AI分析实战",
               "estimated_minutes": 35,
               "resource": {
-                "title": "水利大数据分析（B站）",
-                "url": "https://search.bilibili.com/all?keyword=水利大数据分析",
-                "tags": "水利,视频,高级",
+                "title": "大数据AI分析（B站）",
+                "url": "https://search.bilibili.com/all?keyword=大数据AI分析",
+                "tags": "视频,高级",
                 "difficulty": "高级",
                 "type": "视频"
               }
@@ -1221,36 +1221,36 @@
           "tasks": [
             {
               "type": "阅读",
-              "title": "用AI进行水文时间序列预测",
+              "title": "用AI进行销售数据趋势预测",
               "estimated_minutes": 35,
               "resource": {
-                "title": "时间序列AI预测（掘金）",
-                "url": "https://juejin.cn/search?query=时间序列AI预测",
-                "tags": "水利,实操,高级",
+                "title": "销售趋势AI预测（掘金）",
+                "url": "https://juejin.cn/search?query=销售趋势AI预测",
+                "tags": "实操,高级",
                 "difficulty": "高级",
                 "type": "文章"
               }
             },
             {
               "type": "实操",
-              "title": "搭建一个水位预测AI模型原型",
+              "title": "搭建一个销售预测AI模型原型",
               "estimated_minutes": 60,
               "resource": {
                 "title": "阿里云百炼平台",
                 "url": "https://bailian.console.aliyun.com/",
-                "tags": "水利,实操,高级",
+                "tags": "实操,高级",
                 "difficulty": "高级",
                 "type": "案例"
               }
             },
             {
               "type": "视频",
-              "title": "观看：AI在水利预测中的应用",
+              "title": "观看：AI在数据分析预测中的应用",
               "estimated_minutes": 35,
               "resource": {
-                "title": "AI水位预测（B站）",
-                "url": "https://search.bilibili.com/all?keyword=AI水位预测",
-                "tags": "水利,视频,高级",
+                "title": "AI销售预测（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI销售预测",
+                "tags": "视频,高级",
                 "difficulty": "高级",
                 "type": "视频"
               }
@@ -1262,36 +1262,36 @@
           "tasks": [
             {
               "type": "阅读",
-              "title": "智能化水闸调度：算法与方案",
+              "title": "RPA流程自动化：算法与方案",
               "estimated_minutes": 30,
               "resource": {
-                "title": "智能水闸AI方案（CSDN）",
-                "url": "https://so.csdn.net/so/search?q=智能水闸AI方案",
-                "tags": "水利,实操,高级",
+                "title": "RPA自动化AI方案（CSDN）",
+                "url": "https://so.csdn.net/so/search?q=RPA自动化AI方案",
+                "tags": "实操,高级",
                 "difficulty": "高级",
                 "type": "文章"
               }
             },
             {
               "type": "实操",
-              "title": "用AI优化水闸调度参数",
+              "title": "用AI优化业务流程参数",
               "estimated_minutes": 60,
               "resource": {
                 "title": "通义千问API",
                 "url": "https://tongyi.aliyun.com/",
-                "tags": "水利,实操,高级",
+                "tags": "实操,高级",
                 "difficulty": "高级",
                 "type": "案例"
               }
             },
             {
               "type": "视频",
-              "title": "观看：智慧水利项目案例",
+              "title": "观看：综合AI项目案例",
               "estimated_minutes": 35,
               "resource": {
-                "title": "智慧水利项目全流程（B站）",
-                "url": "https://search.bilibili.com/all?keyword=智慧水利项目全流程",
-                "tags": "水利,视频,高级",
+                "title": "AI项目全流程实战（B站）",
+                "url": "https://search.bilibili.com/all?keyword=AI项目全流程实战",
+                "tags": "视频,高级",
                 "difficulty": "高级",
                 "type": "视频"
               }
@@ -1302,32 +1302,32 @@
     },
     {
       "week": 11,
-      "theme": "水利+AI 项目实战（下）",
-      "goal": "完成水利AI项目，整合RAG+Agent技术",
+      "theme": "综合项目实战（下）",
+      "goal": "完成综合AI项目，整合RAG+Agent技术",
       "days": [
         {
           "day": 1,
           "tasks": [
             {
               "type": "阅读",
-              "title": "将RAG和Agent整合到一个水利应用中",
+              "title": "将RAG和Agent整合到一个完整应用中",
               "estimated_minutes": 35,
               "resource": {
                 "title": "RAG+Agent整合方案（掘金）",
                 "url": "https://juejin.cn/search?query=RAG+Agent整合方案",
-                "tags": "RAG,Agent,水利,高级",
+                "tags": "RAG,Agent,高级",
                 "difficulty": "高级",
                 "type": "文章"
               }
             },
             {
               "type": "实操",
-              "title": "搭建水利智能问答+数据分析Agent",
+              "title": "搭建智能问答+数据分析Agent",
               "estimated_minutes": 60,
               "resource": {
                 "title": "LangChain+通义API",
                 "url": "https://python.langchain.com/docs/get_started/introduction",
-                "tags": "RAG,Agent,实操,水利,高级",
+                "tags": "RAG,Agent,实操,高级",
                 "difficulty": "高级",
                 "type": "案例"
               }
@@ -1363,7 +1363,7 @@
             },
             {
               "type": "实操",
-              "title": "将你的水利AI应用部署到云端",
+              "title": "将你的AI应用部署到云端",
               "estimated_minutes": 60,
               "resource": {
                 "title": "阿里云函数计算FC",
@@ -1440,12 +1440,12 @@
           "tasks": [
             {
               "type": "阅读",
-              "title": "AI+水利行业前沿趋势",
+              "title": "AI行业前沿趋势",
               "estimated_minutes": 30,
               "resource": {
-                "title": "2024 AI+水利发展报告（知乎）",
-                "url": "https://www.zhihu.com/search?type=content&q=2024 AI+水利发展报告",
-                "tags": "水利,行业,总结,高级",
+                "title": "2024 AI行业发展趋势（知乎）",
+                "url": "https://www.zhihu.com/search?type=content&q=2024 AI行业发展趋势",
+                "tags": "行业,总结,高级",
                 "difficulty": "高级",
                 "type": "文章"
               }

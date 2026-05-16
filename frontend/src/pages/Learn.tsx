@@ -1,47 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
-import ProgressBar from "../components/ProgressBar";
 
-interface Module {
-  id: number;
-  week: number;
-  day: number;
-  title: string;
-  theme: string;
-  goal: string;
-  status: string;
-  content: string;
-  external_links: string;
-}
-
-interface UserProfile {
-  current_level: string;
-  current_week: number;
-  level_progress: number;
-}
-
-const STAGE_MAP: Record<string, { label: string; range: [number, number]; desc: string }> = {
-  "小白": { label: "小白阶段", range: [1, 4], desc: "建立对AI的基本认知，学会使用主流AI工具" },
-  "入门": { label: "入门阶段", range: [5, 8], desc: "掌握Prompt工程、API调用，能搭建简单AI应用" },
-  "落地": { label: "落地阶段", range: [9, 12], desc: "独立部署GitHub项目，将AI整合到实际工作中" },
-};
-
-const LEVELS = ["小白", "入门", "落地"];
+interface Module { id: number; week: number; day: number; title: string; theme: string; goal: string; status: string; content: string; external_links: string; }
+interface UserProfile { current_level: string; current_week: number; level_progress: number; }
 
 function groupByWeek(modules: Module[]) {
   const map: Record<number, Module[]> = {};
-  modules.forEach((m) => {
-    if (!map[m.week]) map[m.week] = [];
-    map[m.week].push(m);
-  });
+  modules.forEach((m) => { if (!map[m.week]) map[m.week] = []; map[m.week].push(m); });
   return Object.entries(map).sort((a, b) => Number(a[0]) - Number(b[0]));
 }
 
 function stageForWeek(week: number): string {
-  if (week <= 4) return "小白";
-  if (week <= 8) return "入门";
-  return "落地";
+  if (week <= 4) return "小白"; if (week <= 8) return "入门"; return "落地";
 }
 
 export default function Learn() {
@@ -53,102 +24,93 @@ export default function Learn() {
 
   useEffect(() => {
     Promise.all([
-      api.get("/api/modules"),
-      api.get("/api/user/profile"),
+      api.get("/modules"),
+      api.get("/user/profile"),
     ]).then(([modRes, profRes]) => {
       const published = (modRes.data as Module[]).filter((m) => m.status === "published" || m.status === "draft");
       setModules(published);
       setProfile(profRes.data);
       setLoading(false);
-      if (profRes.data.current_week) {
-        setExpandedWeek(profRes.data.current_week);
-      }
+      if (profRes.data.current_week) setExpandedWeek(profRes.data.current_week);
     }).catch(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="p-6 text-center text-gray-500">加载中...</div>;
+  if (loading) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">加载中</div>;
 
   const grouped = groupByWeek(modules);
   const currentWeek = profile?.current_week || 1;
-  const currentLevelIdx = LEVELS.indexOf(profile?.current_level || "小白");
 
   return (
-    <div className="p-4 pb-24 max-w-2xl mx-auto">
-      <h1 className="text-xl font-bold mb-2">学习中心</h1>
-      <p className="text-sm text-gray-500 mb-4">从零到独立部署，一步步掌握AI实战技能</p>
-
-      {/* 阶段进度 */}
-      <div className="bg-white rounded-xl p-4 shadow-sm mb-6">
-        <div className="flex justify-between items-center mb-3">
-          {LEVELS.map((level, i) => (
-            <div key={level} className="flex items-center gap-1">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                i < currentLevelIdx ? "bg-green-500 text-white" :
-                i === currentLevelIdx ? "bg-blue-500 text-white" :
-                "bg-gray-200 text-gray-400"
-              }`}>
-                {i < currentLevelIdx ? "✓" : i + 1}
-              </div>
-              <span className={`text-xs ${i === currentLevelIdx ? "font-bold text-blue-600" : "text-gray-400"}`}>
-                {level}
-              </span>
-              {i < 2 && <div className={`w-6 h-0.5 ${i < currentLevelIdx ? "bg-green-500" : "bg-gray-200"}`} />}
-            </div>
-          ))}
-        </div>
-        <ProgressBar value={currentWeek} max={12} label={`当前进度：第 ${currentWeek} 周 / 12 周`} size="sm" />
+    <div className="space-y-12 pb-24">
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 tracking-wider">学习中心</h2>
+        <p className="text-base text-gray-500 dark:text-gray-400 mt-2">从零到独立部署，逐步掌握 AI</p>
       </div>
 
-      {/* 课程目录 */}
-      <div className="space-y-3">
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-sm text-gray-500 dark:text-gray-400 tracking-wider">课程进度</span>
+          <span className="text-sm text-gray-500 dark:text-gray-500">{currentWeek}/12 周</span>
+        </div>
+        <div className="h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+          <div className="h-full bg-gray-900 dark:bg-gray-100 rounded-full transition-all duration-700"
+               style={{ width: `${(currentWeek / 12) * 100}%` }} />
+        </div>
+      </div>
+
+      <div className="flex gap-10 text-base">
+        {[
+          ["小白", "1-4 周"],
+          ["入门", "5-8 周"],
+          ["落地", "9-12 周"],
+        ].map(([stage, range], i) => {
+          const isActive = (stage === "小白" && currentWeek <= 4) || (stage === "入门" && currentWeek >= 5 && currentWeek <= 8) || (stage === "落地" && currentWeek >= 9);
+          return (
+            <div key={stage} className={isActive ? "" : "opacity-25"}>
+              <div className="text-sm text-gray-500 dark:text-gray-500">0{i + 1}</div>
+              <div className="font-bold text-gray-900 dark:text-gray-100 text-lg">{stage}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="space-y-1">
         {grouped.map(([weekStr, weekModules]) => {
           const week = Number(weekStr);
-          const stage = stageForWeek(week);
           const isExpanded = expandedWeek === week;
           const isCurrent = week === currentWeek;
-          const stageInfo = STAGE_MAP[stage];
-          const showStageHeader = week === 1 || stageForWeek(week - 1) !== stage;
 
           return (
             <div key={week}>
-              {showStageHeader && (
-                <div className="mb-2 mt-4 first:mt-0">
-                  <span className="inline-block px-3 py-1 text-xs font-bold rounded-full bg-blue-100 text-blue-700">
-                    {stageInfo.label}
-                  </span>
-                  <p className="text-xs text-gray-400 mt-1">{stageInfo.desc}</p>
+              {(week === 1 || week === 5 || week === 9) && (
+                <div className="text-xs text-gray-500 dark:text-gray-500 tracking-widest uppercase mt-10 mb-4 pl-1">
+                  {stageForWeek(week) === "小白" ? "第一阶段" : stageForWeek(week) === "入门" ? "第二阶段" : "第三阶段"}
                 </div>
               )}
               <div
-                className={`bg-white rounded-lg p-4 shadow-sm cursor-pointer border-2 transition-colors ${
-                  isCurrent ? "border-blue-400" : "border-transparent hover:border-gray-200"
+                className={`py-4 px-4 cursor-pointer border-l-2 transition-colors ${
+                  isCurrent ? "border-gray-900 dark:border-gray-100 bg-gray-50 dark:bg-neutral-900" :
+                  isExpanded ? "border-gray-200 dark:border-gray-700" : "border-transparent hover:border-gray-100 dark:hover:border-gray-800"
                 }`}
                 onClick={() => setExpandedWeek(isExpanded ? null : week)}
               >
                 <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-sm font-bold text-gray-700">第 {week} 周</span>
-                    <span className="ml-2 text-sm text-gray-600">{weekModules[0]?.theme}</span>
+                  <div className="flex items-center gap-4">
+                    <span className={`text-sm font-bold ${isCurrent ? "text-gray-900 dark:text-gray-100" : "text-gray-500 dark:text-gray-500"}`}>W{week}</span>
+                    <span className={`text-base ${isCurrent ? "text-gray-900 dark:text-gray-100 font-bold" : "text-gray-600 dark:text-gray-400"}`}>{weekModules[0]?.theme}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    {isCurrent && <span className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded">当前</span>}
-                    <span className={`text-gray-400 transition-transform ${isExpanded ? "rotate-90" : ""}`}>▶</span>
-                  </div>
+                  <span className={`text-base text-gray-500 dark:text-gray-500 transition-transform ${isExpanded ? "rotate-90" : ""}`}>&#8250;</span>
                 </div>
                 {isExpanded && (
-                  <div className="mt-3 space-y-2 border-t pt-3">
-                    <p className="text-xs text-gray-400 mb-2">目标：{weekModules[0]?.goal}</p>
+                  <div className="mt-4 ml-10 space-y-1">
                     {weekModules.sort((a, b) => a.day - b.day).map((m) => (
-                      <div
-                        key={m.id}
-                        className="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50 cursor-pointer"
-                        onClick={(e) => { e.stopPropagation(); navigate(`/learn/${m.week}/${m.day}`); }}
-                      >
-                        <span className="text-sm">
-                          <span className="text-gray-400 mr-2">Day {m.day}</span>
-                          {m.title}
+                      <div key={m.id} className="flex items-center justify-between py-3 px-3 hover:bg-gray-50 dark:hover:bg-neutral-900 cursor-pointer rounded"
+                           onClick={(e) => { e.stopPropagation(); navigate(`/learn/${m.week}/${m.day}`); }}>
+                        <span>
+                          <span className="text-gray-500 dark:text-gray-500 mr-4 text-sm">Day {m.day}</span>
+                          <span className="text-base text-gray-700 dark:text-gray-300">{m.title}</span>
                         </span>
-                        <span className="text-blue-500 text-sm">查看 →</span>
+                        <span className="text-gray-500 text-base">→</span>
                       </div>
                     ))}
                   </div>

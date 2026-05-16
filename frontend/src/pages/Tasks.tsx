@@ -117,7 +117,7 @@ export default function Tasks() {
       )}
 
       <div className="space-y-3">
-        {tasks.length === 0 && <p className="text-center text-gray-400 py-10">今天还没有任务，点击上方按钮生成</p>}
+        {tasks.length === 0 && <p className="text-center text-gray-500 py-10">今天还没有任务，点击上方按钮生成</p>}
         {tasks.map((task) => (
           <TaskCard
             key={task.id}

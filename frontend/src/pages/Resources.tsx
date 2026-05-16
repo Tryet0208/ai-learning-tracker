@@ -1,15 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 
-interface Resource {
-  id: number;
-  title: string;
-  url: string;
-  tags: string;
-  type: string;
-  difficulty: string;
-  source: string;
-}
+interface Resource { id: number; title: string; url: string; tags: string; type: string; difficulty: string; source: string; }
 
 const TYPE_FILTERS = ['全部', '文章', '视频', '案例'];
 const TAG_FILTERS = ['全部', 'LLM', 'RAG', 'Prompt', 'LangChain', 'Agent', 'NLP'];
@@ -32,90 +24,77 @@ export default function Resources() {
 
   const handleAdd = async () => {
     await api.post('/resources', newRes);
-    setShowAdd(false);
-    setNewRes({ title: '', url: '', tags: '', type: '文章', difficulty: '入门' });
+    setShowAdd(false); setNewRes({ title: '', url: '', tags: '', type: '文章', difficulty: '入门' });
     fetchResources();
   };
-
-  const handleDelete = async (id: number) => {
-    await api.delete(`/resources/${id}`);
-    fetchResources();
-  };
+  const handleDelete = async (id: number) => { await api.delete(`/resources/${id}`); fetchResources(); };
 
   return (
-    <div className="space-y-4">
-      <div className="flex gap-2 flex-wrap">
+    <div className="space-y-8 pb-24">
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 tracking-wider">资源</h2>
+
+      <div className="flex gap-2 flex-wrap items-center">
         {TYPE_FILTERS.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTypeFilter(t)}
-            className={`px-3 py-1 rounded-full text-xs ${typeFilter === t ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}
-          >{t}</button>
+          <button key={t} onClick={() => setTypeFilter(t)}
+                  className={`text-sm px-4 py-2 rounded transition-colors font-bold ${typeFilter === t ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'}`}>{t}</button>
         ))}
-        <span className="mx-1 text-gray-300">|</span>
+        <span className="w-px h-5 bg-gray-200 dark:bg-gray-700 mx-3" />
         {TAG_FILTERS.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTagFilter(t)}
-            className={`px-3 py-1 rounded-full text-xs ${tagFilter === t ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}
-          >{t}</button>
+          <button key={t} onClick={() => setTagFilter(t)}
+                  className={`text-sm px-4 py-2 rounded transition-colors font-bold ${tagFilter === t ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'}`}>{t}</button>
         ))}
-        <button onClick={() => setShowAdd(true)} className="bg-green-500 text-white px-4 py-1 rounded-full text-xs ml-auto">
-          ➕ 添加
-        </button>
+        <button onClick={() => setShowAdd(true)}
+                className="text-sm text-gray-900 dark:text-gray-100 border-2 border-gray-300 dark:border-gray-600 px-4 py-2 rounded hover:bg-gray-50 dark:hover:bg-neutral-900 ml-auto transition-colors font-bold">添加</button>
       </div>
 
       {showAdd && (
-        <div className="bg-white rounded-xl p-4 shadow-sm space-y-3">
+        <div className="border-2 border-gray-100 dark:border-gray-800 rounded-lg p-5 space-y-4">
           <input type="text" placeholder="标题" value={newRes.title}
-            onChange={(e) => setNewRes({ ...newRes, title: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2 text-sm" />
+                 onChange={(e) => setNewRes({ ...newRes, title: e.target.value })}
+                 className="w-full border-2 border-gray-200 dark:border-gray-700 rounded px-4 py-3 text-base bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-gray-400 dark:focus:border-gray-500" />
           <input type="text" placeholder="URL" value={newRes.url}
-            onChange={(e) => setNewRes({ ...newRes, url: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2 text-sm" />
-          <div className="flex gap-2">
+                 onChange={(e) => setNewRes({ ...newRes, url: e.target.value })}
+                 className="w-full border-2 border-gray-200 dark:border-gray-700 rounded px-4 py-3 text-base bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-gray-400 dark:focus:border-gray-500" />
+          <div className="flex gap-3">
             <select value={newRes.type} onChange={(e) => setNewRes({ ...newRes, type: e.target.value })}
-              className="border rounded-lg px-3 py-2 text-sm">
+                    className="border-2 border-gray-200 dark:border-gray-700 rounded px-4 py-3 text-base bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100">
               <option value="文章">文章</option><option value="视频">视频</option><option value="案例">案例</option>
             </select>
             <select value={newRes.difficulty} onChange={(e) => setNewRes({ ...newRes, difficulty: e.target.value })}
-              className="border rounded-lg px-3 py-2 text-sm">
+                    className="border-2 border-gray-200 dark:border-gray-700 rounded px-4 py-3 text-base bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100">
               <option value="入门">入门</option><option value="进阶">进阶</option><option value="高级">高级</option>
             </select>
             <input type="text" placeholder="标签(逗号分隔)" value={newRes.tags}
-              onChange={(e) => setNewRes({ ...newRes, tags: e.target.value })}
-              className="border rounded-lg px-3 py-2 text-sm flex-1" />
+                   onChange={(e) => setNewRes({ ...newRes, tags: e.target.value })}
+                   className="border-2 border-gray-200 dark:border-gray-700 rounded px-4 py-3 text-base flex-1 bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-gray-400 dark:focus:border-gray-500" />
           </div>
-          <div className="flex gap-2">
-            <button onClick={handleAdd} className="bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm">确认添加</button>
-            <button onClick={() => setShowAdd(false)} className="bg-gray-200 px-4 py-2 rounded-lg text-sm">取消</button>
+          <div className="flex gap-3">
+            <button onClick={handleAdd} className="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-6 py-3 rounded text-base font-bold">确认</button>
+            <button onClick={() => setShowAdd(false)} className="border-2 border-gray-200 dark:border-gray-700 px-6 py-3 rounded text-base text-gray-500 dark:text-gray-400">取消</button>
           </div>
         </div>
       )}
 
-      <div className="space-y-2">
+      <div className="space-y-1">
         {resources.map((r) => (
-          <div key={r.id} className="bg-white rounded-xl p-3 shadow-sm flex items-center gap-3">
-            <span className="text-2xl">{r.type === '视频' ? '🎬' : r.type === '案例' ? '🧪' : '📄'}</span>
+          <div key={r.id} className="flex items-center gap-4 py-4 border-b border-gray-50 dark:border-gray-800 last:border-0">
             <div className="flex-1 min-w-0">
               <a href={r.url} target="_blank" rel="noopener noreferrer"
-                className="text-indigo-600 font-medium hover:underline truncate block">
-                {r.title}
-              </a>
-              <div className="flex gap-2 mt-0.5 flex-wrap">
-                <span className="text-xs bg-gray-100 px-1.5 py-0.5 rounded">{r.type}</span>
-                <span className="text-xs bg-gray-100 px-1.5 py-0.5 rounded">{r.difficulty}</span>
+                 className="text-base text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 transition-colors font-bold truncate block">{r.title}</a>
+              <div className="flex gap-2 mt-2">
+                <span className="text-sm text-gray-500 dark:text-gray-500">{r.type}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-500">{r.difficulty}</span>
                 {r.tags.split(',').filter(Boolean).map((tag: string) => (
-                  <span key={tag} className="text-xs bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded">{tag}</span>
+                  <span key={tag} className="text-sm text-gray-500 dark:text-gray-500">{tag}</span>
                 ))}
               </div>
             </div>
             {r.source === 'user' && (
-              <button onClick={() => handleDelete(r.id)} className="text-red-400 flex-shrink-0 text-sm">删除</button>
+              <button onClick={() => handleDelete(r.id)} className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-base transition-colors">删除</button>
             )}
           </div>
         ))}
-        {resources.length === 0 && <p className="text-center text-gray-400 py-10">暂无资源</p>}
+        {resources.length === 0 && <p className="py-20 text-center text-base text-gray-500 dark:text-gray-400">暂无资源</p>}
       </div>
     </div>
   );
