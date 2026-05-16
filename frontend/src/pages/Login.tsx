@@ -17,16 +17,33 @@ export default function Login() {
   const { dark, toggle } = useTheme();
   const timerRef = useRef<number | null>(null);
   const [index, setIndex] = useState(0);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const vidRef = useRef<HTMLVideoElement>(null);
+  const preloadRef = useRef<HTMLVideoElement>(null);
 
-  // When video ends → fade out → change src (triggers onLoadedData → fade in)
+  // When current video ends → fade out → switch to next (which is already preloaded)
   useEffect(() => {
     if (!show) {
-      const t = setTimeout(() => setIndex((i) => (i + 1) % VIDEOS.length), 700);
+      const t = setTimeout(() => {
+        setIndex((i) => (i + 1) % VIDEOS.length);
+      }, 700);
       return () => clearTimeout(t);
     }
   }, [show]);
+
+  // Preload next video in hidden element while current one plays
+  useEffect(() => {
+    const next = VIDEOS[(index + 1) % VIDEOS.length];
+    if (preloadRef.current) {
+      preloadRef.current.src = next;
+      preloadRef.current.load();
+    }
+  }, [index]);
+
+  const handleCanPlayThrough = () => {
+    vidRef.current?.play();
+    setShow(true);
+  };
 
   const startCountdown = useCallback(() => {
     setCountdown(60);
@@ -65,8 +82,9 @@ export default function Login() {
     <div className="min-h-screen bg-white dark:bg-neutral-950 flex relative overflow-hidden transition-colors duration-300">
       <video ref={vidRef} autoPlay muted playsInline src={VIDEOS[index]}
              onEnded={() => setShow(false)}
-             onLoadedData={() => { vidRef.current?.play(); setShow(true); }}
+             onCanPlayThrough={handleCanPlayThrough}
              className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none transition-opacity duration-700 ${show ? 'opacity-100' : 'opacity-0'}`} />
+      <video ref={preloadRef} muted playsInline className="hidden" />
 
       <div className="relative z-10 flex items-center justify-center flex-1 px-6">
         <div className="w-full max-w-sm">
