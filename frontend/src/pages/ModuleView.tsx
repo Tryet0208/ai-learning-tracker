@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api";
 import MarkdownView from "../components/MarkdownView";
+import { GUEST_MODULES } from "../guestData";
 
 interface Module { id: number; week: number; day: number; title: string; theme: string; goal: string; content: string; status: string; external_links: string; }
 interface Link { title: string; url: string; }
@@ -17,7 +18,11 @@ export default function ModuleView() {
     setLoading(true);
     api.get(`/modules/${week}/${day}`)
       .then((res) => { setModule(res.data); setLoading(false); })
-      .catch(() => { setError("模块未找到"); setLoading(false); });
+      .catch(() => {
+        const guest = (GUEST_MODULES as Module[]).find((m) => m.week === Number(week) && m.day === Number(day));
+        if (guest) { setModule(guest); setLoading(false); }
+        else { setError("模块未找到"); setLoading(false); }
+      });
   }, [week, day]);
 
   if (loading) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">加载中</div>;

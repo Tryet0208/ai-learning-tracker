@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
+import { GUEST_MODULES } from "../guestData";
 
 interface Module { id: number; week: number; day: number; title: string; theme: string; goal: string; status: string; content: string; external_links: string; }
 interface UserProfile { current_level: string; current_week: number; level_progress: number; }
@@ -32,7 +33,12 @@ export default function Learn() {
       setProfile(profRes.data);
       setLoading(false);
       if (profRes.data.current_week) setExpandedWeek(profRes.data.current_week);
-    }).catch(() => setLoading(false));
+    }).catch(() => {
+      setModules(GUEST_MODULES as Module[]);
+      setProfile({ current_level: "入门", current_week: 1, level_progress: 0 });
+      setExpandedWeek(1);
+      setLoading(false);
+    });
   }, []);
 
   if (loading) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">加载中</div>;
@@ -74,12 +80,6 @@ export default function Learn() {
         })}
       </div>
 
-      {grouped.length === 0 && (
-        <div className="py-20 text-center">
-          <p className="text-base text-gray-500 dark:text-gray-400 mb-2">课程内容需要后端支持</p>
-          <p className="text-sm text-gray-400 dark:text-gray-500">请确保后端服务正在运行</p>
-        </div>
-      )}
       <div className="space-y-1">
         {grouped.map(([weekStr, weekModules]) => {
           const week = Number(weekStr);

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../api";
 import MarkdownView from "../components/MarkdownView";
+import { GUEST_PROJECTS } from "../guestData";
 
 interface Step { order: number; title: string; content: string; download_url?: string; }
 interface Project { id: number; title: string; summary: string; difficulty: string; tags: string[]; steps: Step[]; source_links: { label: string; url: string }[]; }
@@ -12,7 +13,10 @@ export default function Workshop() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get("/projects").then((res) => { setProjects(res.data); setLoading(false); }).catch(() => setLoading(false));
+    api.get("/projects").then((res) => { setProjects(res.data); setLoading(false); }).catch(() => {
+      setProjects(GUEST_PROJECTS as Project[]);
+      setLoading(false);
+    });
   }, []);
 
   if (loading) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">加载中</div>;
