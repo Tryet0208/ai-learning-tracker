@@ -7,6 +7,8 @@ import { GUEST_MODULES } from "../guestData";
 interface Module { id: number; week: number; day: number; title: string; theme: string; goal: string; content: string; status: string; external_links: string; }
 interface Link { title: string; url: string; }
 
+const GUEST_PREVIEW_WEEKS = 2;
+
 export default function ModuleView() {
   const { week, day } = useParams<{ week: string; day: string }>();
   const [module, setModule] = useState<Module | null>(null);
@@ -14,18 +16,37 @@ export default function ModuleView() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const isGuest = localStorage.getItem("auth_token") === "guest_token";
+
   useEffect(() => {
     setLoading(true);
     api.get(`/modules/${week}/${day}`)
       .then((res) => { setModule(res.data); setLoading(false); })
       .catch(() => {
-        const guest = (GUEST_MODULES as Module[]).find((m) => m.week === Number(week) && m.day === Number(day));
+        const wn = Number(week);
+        if (isGuest && wn > GUEST_PREVIEW_WEEKS) {
+          setError("locked");
+          setLoading(false);
+          return;
+        }
+        const guest = (GUEST_MODULES as Module[]).find((m) => m.week === wn && m.day === Number(day));
         if (guest) { setModule(guest); setLoading(false); }
         else { setError("模块未找到"); setLoading(false); }
       });
   }, [week, day]);
 
   if (loading) return <div className="py-24 text-center text-base text-gray-500 dark:text-gray-400">加载中</div>;
+  if (error === "locked") return (
+    <div className="py-24 text-center max-w-md mx-auto">
+      <div className="text-4xl mb-6">🔒</div>
+      <p className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-3">此内容需要登录</p>
+      <p className="text-base text-gray-500 dark:text-gray-400 mb-8">游客模式仅开放前 {GUEST_PREVIEW_WEEKS} 周预览，登录后解锁全部 12 周课程</p>
+      <div className="flex gap-4 justify-center">
+        <button onClick={() => navigate("/login")} className="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-8 py-3 rounded text-base font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">去登录</button>
+        <button onClick={() => navigate("/learn")} className="border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 px-8 py-3 rounded text-base font-bold hover:border-gray-900 dark:hover:border-gray-100 transition-colors">返回课程</button>
+      </div>
+    </div>
+  );
   if (error) return (
     <div className="py-24 text-center">
       <p className="text-gray-500 dark:text-gray-400 mb-8">{error}</p>
