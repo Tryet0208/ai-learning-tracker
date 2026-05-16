@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api';
 import { useTheme } from '../ThemeContext';
 
-const VIDEOS = ['/bg.mp4', '/bg2.mp4', '/bg3.mp4'];
+const BASE = import.meta.env.BASE_URL;
+const VIDEOS = [BASE + 'bg.mp4', BASE + 'bg2.mp4', BASE + 'bg3.mp4'];
 
 export default function Login() {
   const [email, setEmail] = useState('');
