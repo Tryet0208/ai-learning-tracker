@@ -1,6 +1,5 @@
-import uuid
 from pathlib import Path
-from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from database import get_db
@@ -8,9 +7,6 @@ from models import User
 from services.auth import get_current_user
 
 router = APIRouter()
-
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-UPLOAD_DIR = BASE_DIR / "uploads" / "avatars"
 
 
 class UserUpdate(BaseModel):
@@ -55,24 +51,3 @@ def update_profile(data: UserUpdate, user: User = Depends(get_current_user), db:
     db.commit()
     db.refresh(user)
     return {"message": "更新成功"}
-
-
-@router.post("/avatar")
-async def upload_avatar(
-    file: UploadFile = File(...),
-    user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
-):
-    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-    ext = file.filename.split(".")[-1] if file.filename else "png"
-    filename = f"{uuid.uuid4().hex}.{ext}"
-    filepath = UPLOAD_DIR / filename
-
-    content = await file.read()
-    with open(filepath, "wb") as f:
-        f.write(content)
-
-    user.avatar_path = f"/uploads/avatars/{filename}"
-    db.commit()
-
-    return {"avatar_path": f"/uploads/avatars/{filename}"}
